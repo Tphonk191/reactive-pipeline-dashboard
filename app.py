@@ -1,9 +1,12 @@
 import time
 import random
 import collections
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from dataclasses import dataclass
 from typing import Any
+
+# Múi giờ Việt Nam (UTC+7 / ICT)
+VN_TZ = timezone(timedelta(hours=7))
 
 import streamlit as st
 import pandas as pd
@@ -173,7 +176,7 @@ with tab1:
                     if consumed:
                         current_window_items.append(consumed)
                         raw_events.append({
-                            "Thời gian": datetime.fromtimestamp(consumed.timestamp).strftime("%H:%M:%S.%f")[:-3],
+                            "Thời gian": datetime.fromtimestamp(consumed.timestamp, tz=VN_TZ).strftime("%H:%M:%S.%f")[:-3],
                             "Cảm biến": consumed.sensor_id,
                             "Nhiệt độ (C)": consumed.temperature
                         })
@@ -192,7 +195,7 @@ with tab1:
 
                     batch_history.insert(0, {
                         "Cửa sổ": f"Window #{window_index}",
-                        "Thời điểm": datetime.now().strftime("%H:%M:%S"),
+                        "Thời điểm": datetime.now(tz=VN_TZ).strftime("%H:%M:%S"),
                         "Bản ghi": count_t,
                         "TB (C)": avg_t,
                         "Min (C)": min_t,
