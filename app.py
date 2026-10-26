@@ -22,115 +22,83 @@ st.set_page_config(
 )
 
 # ======================================================================================
-# APPLE DESIGN SYSTEM — CSS
+# APPLE DESIGN SYSTEM — CSS (Colorful Dark Mode)
 # ======================================================================================
 st.markdown("""
 <style>
-    /* ── Apple Foundation ── */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-    :root {
-        --apple-bg:         #000000;
-        --apple-surface:    #1c1c1e;
-        --apple-surface-2:  #2c2c2e;
-        --apple-surface-3:  #3a3a3c;
-        --apple-border:     #38383a;
-        --apple-text:       #f5f5f7;
-        --apple-text-2:     #a1a1a6;
-        --apple-text-3:     #86868b;
-        --apple-blue:       #0a84ff;
-        --apple-green:      #30d158;
-        --apple-red:        #ff453a;
-        --apple-orange:     #ff9f0a;
-        --apple-yellow:     #ffd60a;
-        --apple-purple:     #bf5af2;
-        --apple-teal:       #64d2ff;
-        --apple-radius:     14px;
-        --apple-radius-sm:  10px;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
     /* ── Global ── */
     .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
-        background-color: var(--apple-bg) !important;
+        background-color: #000000 !important;
     }
     html, body, .stApp, .stMarkdown, p, span, label, li, td, th {
         font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', 'Helvetica Neue', sans-serif !important;
-        color: var(--apple-text) !important;
         -webkit-font-smoothing: antialiased;
     }
     h1, h2, h3, h4, h5, h6 {
         font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', sans-serif !important;
-        color: var(--apple-text) !important;
         font-weight: 600 !important;
         letter-spacing: -0.02em !important;
     }
-    h1 { font-size: 2.2rem !important; font-weight: 700 !important; }
-    h3 { font-size: 1.4rem !important; }
-    h4 { font-size: 1.15rem !important; }
 
     /* ── Sidebar ── */
     [data-testid="stSidebar"] {
-        background-color: #0d0d0d !important;
-        border-right: 1px solid var(--apple-border) !important;
+        background: linear-gradient(180deg, #0a0a14 0%, #0d0f1a 50%, #0a0a14 100%) !important;
+        border-right: 1px solid rgba(255,255,255,0.06) !important;
     }
     [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
     [data-testid="stSidebar"] label,
     [data-testid="stSidebar"] span {
-        color: var(--apple-text-2) !important;
-    }
-    [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
-        color: var(--apple-text) !important;
+        color: #a1a1a6 !important;
     }
 
-    /* ── Sliders ── */
+    /* ── Slider tracks ── */
     .stSlider [data-baseweb="slider"] [role="slider"] {
-        background-color: var(--apple-blue) !important;
-        border: 2px solid var(--apple-blue) !important;
-    }
-    .stSlider [data-baseweb="slider"] div[data-testid="stThumbValue"] {
-        color: var(--apple-blue) !important;
+        background-color: #0a84ff !important;
     }
 
-    /* ── Tabs ── */
+    /* ── Tabs (Segmented Control) ── */
     .stTabs [data-baseweb="tab-list"] {
-        background-color: var(--apple-surface) !important;
-        border-radius: var(--apple-radius) !important;
-        padding: 4px !important;
-        gap: 2px !important;
-        border: 1px solid var(--apple-border) !important;
+        background: linear-gradient(135deg, rgba(30,30,34,0.9) 0%, rgba(44,44,48,0.7) 100%) !important;
+        border-radius: 16px !important;
+        padding: 5px !important;
+        gap: 3px !important;
+        border: 1px solid rgba(255,255,255,0.08) !important;
+        backdrop-filter: blur(20px) !important;
     }
     .stTabs [data-baseweb="tab"] {
         background-color: transparent !important;
-        color: var(--apple-text-3) !important;
-        border-radius: var(--apple-radius-sm) !important;
+        color: #86868b !important;
+        border-radius: 12px !important;
         font-weight: 500 !important;
         font-size: 0.88rem !important;
-        padding: 10px 20px !important;
+        padding: 10px 22px !important;
         border: none !important;
-        transition: all 0.2s ease !important;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
     .stTabs [aria-selected="true"] {
-        background-color: var(--apple-surface-2) !important;
-        color: var(--apple-text) !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+        background: linear-gradient(135deg, rgba(10,132,255,0.2) 0%, rgba(100,210,255,0.1) 100%) !important;
+        color: #f5f5f7 !important;
+        box-shadow: 0 2px 8px rgba(10,132,255,0.2) !important;
     }
 
     /* ── Buttons ── */
     .stButton > button {
-        background: linear-gradient(180deg, #0a84ff 0%, #0071e3 100%) !important;
+        background: linear-gradient(135deg, #0a84ff 0%, #5e5ce6 100%) !important;
         color: white !important;
         border: none !important;
-        border-radius: var(--apple-radius) !important;
+        border-radius: 14px !important;
         font-weight: 600 !important;
         font-size: 0.95rem !important;
-        padding: 12px 24px !important;
-        transition: all 0.2s ease !important;
+        padding: 12px 28px !important;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
         letter-spacing: -0.01em !important;
     }
     .stButton > button:hover {
-        background: linear-gradient(180deg, #2997ff 0%, #0a84ff 100%) !important;
+        background: linear-gradient(135deg, #2997ff 0%, #7d7aff 100%) !important;
         transform: scale(1.02) !important;
-        box-shadow: 0 4px 16px rgba(10, 132, 255, 0.35) !important;
+        box-shadow: 0 6px 24px rgba(10,132,255,0.4) !important;
     }
     .stButton > button:active {
         transform: scale(0.98) !important;
@@ -138,183 +106,298 @@ st.markdown("""
 
     /* ── Metric Cards ── */
     [data-testid="stMetric"] {
-        background: linear-gradient(135deg, var(--apple-surface) 0%, var(--apple-surface-2) 100%) !important;
-        border: 1px solid var(--apple-border) !important;
-        border-radius: var(--apple-radius) !important;
-        padding: 20px 18px !important;
+        border-radius: 16px !important;
+        padding: 22px 20px !important;
+        border: 1px solid rgba(255,255,255,0.06) !important;
     }
     [data-testid="stMetricLabel"] {
-        color: var(--apple-text-3) !important;
-        font-size: 0.8rem !important;
-        font-weight: 500 !important;
+        font-size: 0.75rem !important;
+        font-weight: 600 !important;
         text-transform: uppercase !important;
-        letter-spacing: 0.04em !important;
+        letter-spacing: 0.06em !important;
     }
     [data-testid="stMetricValue"] {
-        color: var(--apple-text) !important;
-        font-weight: 700 !important;
-        font-size: 1.6rem !important;
-        letter-spacing: -0.02em !important;
+        font-weight: 800 !important;
+        font-size: 1.7rem !important;
+        letter-spacing: -0.03em !important;
     }
 
-    /* ── DataFrames / Tables ── */
+    /* Metric colors — each column gets a unique gradient */
+    div[data-testid="stHorizontalBlock"] > div:nth-child(1) [data-testid="stMetric"] {
+        background: linear-gradient(145deg, rgba(10,132,255,0.15) 0%, rgba(10,132,255,0.03) 100%) !important;
+        border-left: 3px solid #0a84ff !important;
+    }
+    div[data-testid="stHorizontalBlock"] > div:nth-child(1) [data-testid="stMetricValue"] { color: #2997ff !important; }
+
+    div[data-testid="stHorizontalBlock"] > div:nth-child(2) [data-testid="stMetric"] {
+        background: linear-gradient(145deg, rgba(48,209,88,0.15) 0%, rgba(48,209,88,0.03) 100%) !important;
+        border-left: 3px solid #30d158 !important;
+    }
+    div[data-testid="stHorizontalBlock"] > div:nth-child(2) [data-testid="stMetricValue"] { color: #30d158 !important; }
+
+    div[data-testid="stHorizontalBlock"] > div:nth-child(3) [data-testid="stMetric"] {
+        background: linear-gradient(145deg, rgba(255,159,10,0.15) 0%, rgba(255,159,10,0.03) 100%) !important;
+        border-left: 3px solid #ff9f0a !important;
+    }
+    div[data-testid="stHorizontalBlock"] > div:nth-child(3) [data-testid="stMetricValue"] { color: #ff9f0a !important; }
+
+    div[data-testid="stHorizontalBlock"] > div:nth-child(4) [data-testid="stMetric"] {
+        background: linear-gradient(145deg, rgba(191,90,242,0.15) 0%, rgba(191,90,242,0.03) 100%) !important;
+        border-left: 3px solid #bf5af2 !important;
+    }
+    div[data-testid="stHorizontalBlock"] > div:nth-child(4) [data-testid="stMetricValue"] { color: #bf5af2 !important; }
+
+    /* ── DataFrames ── */
     [data-testid="stDataFrame"], .stDataFrame {
-        border-radius: var(--apple-radius) !important;
+        border-radius: 14px !important;
         overflow: hidden !important;
-        border: 1px solid var(--apple-border) !important;
-    }
-
-    /* ── Info/Warning/Success/Error Boxes ── */
-    [data-testid="stAlert"] {
-        border-radius: var(--apple-radius-sm) !important;
-        border: 1px solid var(--apple-border) !important;
-    }
-    div[data-testid="stAlert"][data-baseweb] {
-        background-color: var(--apple-surface) !important;
+        border: 1px solid rgba(255,255,255,0.06) !important;
     }
 
     /* ── Code Blocks ── */
-    .stCodeBlock, pre, code {
-        font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', 'Menlo', monospace !important;
-        border-radius: var(--apple-radius-sm) !important;
-        border: 1px solid var(--apple-border) !important;
+    .stCodeBlock, pre {
+        border-radius: 14px !important;
+        border: 1px solid rgba(255,255,255,0.06) !important;
+        background-color: #0d0d0d !important;
     }
 
-    /* ── Selectbox / Number Input ── */
+    /* ── Selectbox / Input ── */
     [data-baseweb="select"] > div,
     [data-baseweb="input"] > div {
-        background-color: var(--apple-surface) !important;
-        border-color: var(--apple-border) !important;
-        border-radius: var(--apple-radius-sm) !important;
-        color: var(--apple-text) !important;
+        background-color: #1c1c1e !important;
+        border-color: rgba(255,255,255,0.08) !important;
+        border-radius: 12px !important;
     }
 
     /* ── Progress Bar ── */
     .stProgress > div > div {
-        background-color: var(--apple-surface-2) !important;
-        border-radius: 6px !important;
+        background-color: #1c1c1e !important;
+        border-radius: 8px !important;
     }
     .stProgress > div > div > div {
-        background: linear-gradient(90deg, var(--apple-blue), var(--apple-teal)) !important;
-        border-radius: 6px !important;
+        background: linear-gradient(90deg, #0a84ff, #5e5ce6, #bf5af2) !important;
+        border-radius: 8px !important;
     }
 
-    /* ── Spinner ── */
-    .stSpinner > div > div {
-        border-top-color: var(--apple-blue) !important;
-    }
-
-    /* ── Chart Container ── */
+    /* ── Chart ── */
     [data-testid="stVegaLiteChart"] {
-        background-color: var(--apple-surface) !important;
-        border: 1px solid var(--apple-border) !important;
-        border-radius: var(--apple-radius) !important;
-        padding: 12px !important;
+        background: linear-gradient(180deg, rgba(28,28,30,0.6) 0%, rgba(0,0,0,0) 100%) !important;
+        border: 1px solid rgba(255,255,255,0.06) !important;
+        border-radius: 16px !important;
+        padding: 16px !important;
     }
 
-    /* ── Custom Apple Cards ── */
-    .apple-card {
-        background: linear-gradient(145deg, #1c1c1e 0%, #2c2c2e 100%);
-        border: 1px solid #38383a;
-        border-radius: 16px;
-        padding: 24px;
-        margin-bottom: 16px;
-    }
-    .apple-card-blue {
-        background: linear-gradient(145deg, rgba(10,132,255,0.08) 0%, rgba(10,132,255,0.02) 100%);
-        border: 1px solid rgba(10,132,255,0.2);
-        border-radius: 16px;
-        padding: 24px;
-        margin-bottom: 16px;
-    }
-    .apple-card-green {
-        background: linear-gradient(145deg, rgba(48,209,88,0.08) 0%, rgba(48,209,88,0.02) 100%);
-        border: 1px solid rgba(48,209,88,0.2);
-        border-radius: 16px;
-        padding: 24px;
-        margin-bottom: 16px;
-    }
-    .apple-card-orange {
-        background: linear-gradient(145deg, rgba(255,159,10,0.08) 0%, rgba(255,159,10,0.02) 100%);
-        border: 1px solid rgba(255,159,10,0.2);
-        border-radius: 16px;
-        padding: 24px;
-        margin-bottom: 16px;
+    /* ── Alerts ── */
+    [data-testid="stAlert"] {
+        border-radius: 14px !important;
+        border: 1px solid rgba(255,255,255,0.06) !important;
     }
 
-    /* ── Alert Banner ── */
+    /* ── Divider ── */
+    hr {
+        border: none !important;
+        border-top: 1px solid rgba(255,255,255,0.06) !important;
+        margin: 28px 0 !important;
+    }
+
+    /* ── Custom Alert Banner ── */
     .alert-banner {
-        background: linear-gradient(135deg, rgba(255,69,58,0.12) 0%, rgba(255,69,58,0.04) 100%);
+        background: linear-gradient(135deg, rgba(255,69,58,0.15) 0%, rgba(255,55,95,0.08) 100%);
         border: 1px solid rgba(255,69,58,0.3);
-        border-radius: 14px;
-        padding: 16px 24px;
+        border-radius: 16px;
+        padding: 18px 28px;
         color: #ff453a;
         font-weight: 600;
         text-align: center;
         margin-bottom: 16px;
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
     }
 
-    /* ── Section Divider ── */
-    hr {
-        border: none !important;
-        border-top: 1px solid var(--apple-border) !important;
-        margin: 24px 0 !important;
-    }
-
-    /* ── Pipeline Architecture ── */
-    .pipeline-layer {
-        background: linear-gradient(145deg, #1c1c1e 0%, #2c2c2e 100%);
-        border: 1px solid #38383a;
-        border-radius: 14px;
-        padding: 20px;
-        margin: 8px 0;
+    /* ── Hero Title ── */
+    .hero-title {
         text-align: center;
+        padding: 30px 0 10px 0;
     }
-    .pipeline-layer h5 {
-        margin: 0 0 8px 0 !important;
-        font-size: 0.95rem !important;
+    .hero-title h1 {
+        font-size: 3rem !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.04em !important;
+        background: linear-gradient(135deg, #2997ff 0%, #5e5ce6 30%, #bf5af2 60%, #ff375f 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px !important;
+        line-height: 1.1 !important;
     }
-    .pipeline-layer code {
-        color: var(--apple-blue) !important;
-        background: rgba(10,132,255,0.1) !important;
+    .hero-subtitle {
+        color: #86868b !important;
+        font-size: 1.05rem;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+    }
+
+    /* ── Pipeline Card ── */
+    .pipe-card {
+        border-radius: 20px;
+        padding: 26px 22px;
+        margin-bottom: 12px;
+        min-height: 160px;
+        position: relative;
+        overflow: hidden;
+    }
+    .pipe-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        opacity: 0.08;
+    }
+    .pipe-card-blue {
+        background: linear-gradient(160deg, #0a1628 0%, #0d1f3c 40%, #091322 100%);
+        border: 1px solid rgba(10,132,255,0.25);
+    }
+    .pipe-card-blue::before { background: radial-gradient(circle, #0a84ff, transparent 70%); }
+    .pipe-card-orange {
+        background: linear-gradient(160deg, #1a1008 0%, #2a1a0a 40%, #1a1008 100%);
+        border: 1px solid rgba(255,159,10,0.25);
+    }
+    .pipe-card-orange::before { background: radial-gradient(circle, #ff9f0a, transparent 70%); }
+    .pipe-card-green {
+        background: linear-gradient(160deg, #081a0e 0%, #0c2a15 40%, #081a0e 100%);
+        border: 1px solid rgba(48,209,88,0.25);
+    }
+    .pipe-card-green::before { background: radial-gradient(circle, #30d158, transparent 70%); }
+
+    .pipe-card .pipe-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        display: block;
+    }
+    .pipe-card .pipe-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 10px;
+        display: block;
+    }
+    .pipe-card .pipe-desc {
+        font-size: 0.88rem;
+        color: #a1a1a6 !important;
+        line-height: 1.7;
+    }
+    .pipe-card .pipe-desc code {
         padding: 2px 8px;
         border-radius: 6px;
         font-size: 0.82rem;
     }
-    .pipeline-arrow {
-        text-align: center;
-        color: var(--apple-text-3);
-        font-size: 1.4rem;
-        margin: 4px 0;
-    }
 
-    /* ── Stat Pill ── */
-    .stat-pill {
-        display: inline-block;
-        background: rgba(10,132,255,0.12);
-        color: var(--apple-blue);
+    /* ── Pill ── */
+    .pill       { display:inline-block; border-radius:20px; padding:4px 14px; font-size:0.8rem; font-weight:600; margin:2px 4px; }
+    .pill-blue  { background:rgba(10,132,255,0.15); color:#2997ff; }
+    .pill-green { background:rgba(48,209,88,0.15);  color:#30d158; }
+    .pill-orange{ background:rgba(255,159,10,0.15); color:#ff9f0a; }
+    .pill-purple{ background:rgba(191,90,242,0.15); color:#bf5af2; }
+    .pill-red   { background:rgba(255,69,58,0.15);  color:#ff453a; }
+    .pill-teal  { background:rgba(100,210,255,0.15); color:#64d2ff; }
+
+    /* ── Glass Card ── */
+    .glass-card {
+        background: linear-gradient(145deg, rgba(28,28,30,0.8) 0%, rgba(44,44,48,0.4) 100%);
+        border: 1px solid rgba(255,255,255,0.08);
         border-radius: 20px;
-        padding: 4px 14px;
-        font-size: 0.82rem;
-        font-weight: 600;
-        margin: 2px 4px;
-    }
-    .stat-pill-green {
-        background: rgba(48,209,88,0.12);
-        color: var(--apple-green);
-    }
-    .stat-pill-orange {
-        background: rgba(255,159,10,0.12);
-        color: var(--apple-orange);
-    }
-    .stat-pill-purple {
-        background: rgba(191,90,242,0.12);
-        color: var(--apple-purple);
+        padding: 28px 24px;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        margin-bottom: 16px;
     }
 
-    /* ── Hide Streamlit watermark + hamburger ── */
+    /* ── Arch Layer ── */
+    .arch-layer {
+        border-radius: 16px;
+        padding: 22px;
+        margin: 8px 0;
+        text-align: center;
+    }
+    .arch-layer h5 { margin: 0 0 10px 0 !important; font-size: 0.95rem !important; }
+    .arch-layer code {
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 0.82rem;
+    }
+    .arch-layer-1 {
+        background: linear-gradient(135deg, rgba(10,132,255,0.12) 0%, rgba(10,132,255,0.03) 100%);
+        border: 1px solid rgba(10,132,255,0.2);
+        border-left: 4px solid #0a84ff;
+    }
+    .arch-layer-2 {
+        background: linear-gradient(135deg, rgba(255,159,10,0.12) 0%, rgba(255,159,10,0.03) 100%);
+        border: 1px solid rgba(255,159,10,0.2);
+        border-left: 4px solid #ff9f0a;
+    }
+    .arch-layer-3 {
+        background: linear-gradient(135deg, rgba(48,209,88,0.12) 0%, rgba(48,209,88,0.03) 100%);
+        border: 1px solid rgba(48,209,88,0.2);
+        border-left: 4px solid #30d158;
+    }
+    .arch-arrow { text-align:center; color:#86868b; font-size:1.5rem; margin:4px 0; }
+
+    /* ── Success Card ── */
+    .success-card {
+        background: linear-gradient(135deg, rgba(48,209,88,0.12) 0%, rgba(48,209,88,0.03) 100%);
+        border: 1px solid rgba(48,209,88,0.25);
+        border-radius: 16px;
+        padding: 18px 28px;
+        text-align: center;
+    }
+
+    /* ── Score Card ── */
+    .score-card {
+        background: linear-gradient(160deg, #0d1f3c 0%, #1a0a2e 50%, #0d1f3c 100%);
+        border: 1px solid rgba(191,90,242,0.25);
+        border-radius: 20px;
+        padding: 28px;
+        text-align: center;
+    }
+    .score-card .score-number {
+        font-size: 3.5rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        background: linear-gradient(135deg, #30d158, #0a84ff, #bf5af2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* ── Benchmark Result Card ── */
+    .bench-result {
+        background: linear-gradient(160deg, #0a1628 0%, #0a0d1a 100%);
+        border: 1px solid rgba(10,132,255,0.2);
+        border-radius: 20px;
+        padding: 28px;
+        text-align: center;
+    }
+    .bench-result .bench-number {
+        font-size: 2.8rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        background: linear-gradient(90deg, #0a84ff, #64d2ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* ── Tech Table ── */
+    .tech-table { width:100%; border-collapse:separate; border-spacing:0 6px; }
+    .tech-table td { padding: 8px 12px; vertical-align: middle; }
+    .tech-table tr {
+        background: rgba(28,28,30,0.5);
+        border-radius: 10px;
+    }
+
+    /* ── Hide Streamlit chrome ── */
     #MainMenu { visibility: hidden; }
     footer { visibility: hidden; }
     header { visibility: hidden; }
@@ -375,35 +458,32 @@ class BoundedChannel:
 # SIDEBAR
 # --------------------------------------------------------------------------------------
 st.sidebar.markdown("""
-<div style="text-align:center; padding: 16px 0 8px 0;">
-    <span style="font-size: 2rem;"></span>
-    <h3 style="margin: 4px 0 0 0; font-weight: 700; letter-spacing: -0.03em;">Pipeline Config</h3>
+<div style="text-align:center; padding: 20px 0 4px 0;">
+    <span style="font-size: 1.6rem; background: linear-gradient(135deg, #0a84ff, #bf5af2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800;">⚙ Pipeline Config</span>
 </div>
 """, unsafe_allow_html=True)
-
 st.sidebar.markdown("---")
-st.sidebar.markdown("##### Source")
+
+st.sidebar.markdown('<span class="pill pill-blue">Source</span>', unsafe_allow_html=True)
 emission_rate = st.sidebar.slider("Interval phát (ms)", 50, 1000, 200, 50)
 
-st.sidebar.markdown("##### Engine")
+st.sidebar.markdown('<span class="pill pill-orange">Engine</span>', unsafe_allow_html=True)
 filter_temp = st.sidebar.slider("Filter: Temp > °C", 15.0, 35.0, 22.0, 0.5)
 window_duration = st.sidebar.slider("Tumbling Window (giây)", 1, 10, 3)
 backpressure_mode = st.sidebar.selectbox("Chiến lược Backpressure", [BackpressureStrategy.BUFFER, BackpressureStrategy.DROP, BackpressureStrategy.LATEST])
 buffer_capacity = st.sidebar.slider("Dung lượng Buffer", 5, 100, 20, 5)
 
-st.sidebar.markdown("##### Alerts")
+st.sidebar.markdown('<span class="pill pill-red">Alerts</span>', unsafe_allow_html=True)
 alert_threshold = st.sidebar.slider("Ngưỡng cảnh báo (°C)", 25.0, 40.0, 30.0, 0.5)
 
 # --------------------------------------------------------------------------------------
-# TIÊU ĐỀ
+# HERO TITLE
 # --------------------------------------------------------------------------------------
 st.markdown("""
-<div style="text-align: center; padding: 24px 0 8px 0;">
-    <h1 style="font-size: 2.6rem !important; font-weight: 700 !important; letter-spacing: -0.04em !important; margin-bottom: 4px;">
-        Reactive Pipeline Framework
-    </h1>
-    <p style="color: #86868b !important; font-size: 1.05rem; font-weight: 400; letter-spacing: -0.01em;">
-        Framework xử lý luồng Hướng đối tượng (OOP) · Backpressure · Windowing · Real-time Monitoring
+<div class="hero-title">
+    <h1>Reactive Pipeline<br>Framework</h1>
+    <p class="hero-subtitle">
+        OOP · Backpressure · Windowing · Real-time Monitoring
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -411,60 +491,62 @@ st.markdown("""
 st.write("")
 
 tab1, tab2, tab3, tab4 = st.tabs([
-    "  Giám sát Real-time  ",
-    "  Backpressure  ",
-    "  Kiến trúc OOP  ",
-    "  Benchmark  "
+    "  📡 Real-time  ",
+    "  ⚖️ Backpressure  ",
+    "  🏛️ Kiến trúc  ",
+    "  🚀 Benchmark  "
 ])
 
 # --------------------------------------------------------------------------------------
 # TAB 1: GIÁM SÁT REAL-TIME
 # --------------------------------------------------------------------------------------
 with tab1:
-    st.markdown("### Giám sát Luồng Dữ liệu Thời gian Thực")
     st.write("")
 
-    # Pipeline Graph Cards
     c1, c2, c3 = st.columns(3)
     with c1:
         st.markdown(f"""
-        <div class="apple-card-blue">
-            <h5 style="color: #0a84ff !important; margin: 0 0 10px 0 !important;">Source</h5>
-            <p style="font-size: 0.88rem; color: #a1a1a6 !important; margin: 0;">
-                <code>MockSensorSource</code><br>
-                Interval: <code>{emission_rate}ms</code> · 3 Cảm biến
-            </p>
+        <div class="pipe-card pipe-card-blue">
+            <span class="pipe-icon">📡</span>
+            <span class="pipe-label" style="color: #2997ff;">Source</span>
+            <div class="pipe-desc">
+                <code style="background:rgba(10,132,255,0.15); color:#2997ff;">MockSensorSource</code><br>
+                Interval: <code style="background:rgba(10,132,255,0.15); color:#2997ff;">{emission_rate}ms</code><br>
+                3 cảm biến IoT
+            </div>
         </div>
         """, unsafe_allow_html=True)
     with c2:
         st.markdown(f"""
-        <div class="apple-card-orange">
-            <h5 style="color: #ff9f0a !important; margin: 0 0 10px 0 !important;">Pipeline Engine</h5>
-            <p style="font-size: 0.88rem; color: #a1a1a6 !important; margin: 0;">
-                <code>.Filter(Temp &gt; {filter_temp}°C)</code><br>
-                <code>.TumblingWindow({window_duration}s)</code><br>
-                Strategy: <code>{backpressure_mode}</code>
-            </p>
+        <div class="pipe-card pipe-card-orange">
+            <span class="pipe-icon">⚙️</span>
+            <span class="pipe-label" style="color: #ff9f0a;">Pipeline Engine</span>
+            <div class="pipe-desc">
+                <code style="background:rgba(255,159,10,0.15); color:#ff9f0a;">.Filter(Temp &gt; {filter_temp}°C)</code><br>
+                <code style="background:rgba(255,159,10,0.15); color:#ff9f0a;">.TumblingWindow({window_duration}s)</code><br>
+                Strategy: <code style="background:rgba(255,159,10,0.15); color:#ff9f0a;">{backpressure_mode}</code>
+            </div>
         </div>
         """, unsafe_allow_html=True)
     with c3:
         st.markdown(f"""
-        <div class="apple-card-green">
-            <h5 style="color: #30d158 !important; margin: 0 0 10px 0 !important;">Data Sinks</h5>
-            <p style="font-size: 0.88rem; color: #a1a1a6 !important; margin: 0;">
-                <code>ConsoleBatchSink</code><br>
-                <code>AlertDashboardSink</code><br>
-                Ngưỡng: <code>{alert_threshold}°C</code>
-            </p>
+        <div class="pipe-card pipe-card-green">
+            <span class="pipe-icon">🎯</span>
+            <span class="pipe-label" style="color: #30d158;">Data Sinks</span>
+            <div class="pipe-desc">
+                <code style="background:rgba(48,209,88,0.15); color:#30d158;">ConsoleBatchSink</code><br>
+                <code style="background:rgba(48,209,88,0.15); color:#30d158;">AlertDashboardSink</code><br>
+                Ngưỡng: <code style="background:rgba(48,209,88,0.15); color:#30d158;">{alert_threshold}°C</code>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
     st.write("---")
     col_btn, col_info = st.columns([3, 7])
     with col_btn:
-        start_btn = st.button("Khởi chạy Luồng Giám sát", type="primary", use_container_width=True)
+        start_btn = st.button("▶  Khởi chạy Luồng Giám sát", type="primary", use_container_width=True)
     with col_info:
-        st.caption("Pipeline sẽ phát dữ liệu cảm biến liên tục trong 15 giây, hiển thị đồ thị nhiệt độ và các mẻ cửa sổ (Tumbling Window) theo thời gian thực.")
+        st.caption("Pipeline phát dữ liệu cảm biến liên tục 15 giây, hiển thị đồ thị nhiệt độ và Tumbling Window theo thời gian thực.")
 
     m1, m2, m3, m4 = st.columns(4)
     m_throughput = m1.empty()
@@ -477,17 +559,16 @@ with tab1:
 
     col_batch, col_evt = st.columns([6, 4])
     with col_batch:
-        st.markdown("#### Tumbling Window Batches")
+        st.markdown("#### 📦 Tumbling Window Batches")
         batch_placeholder = st.empty()
     with col_evt:
-        st.markdown("#### Sự kiện Gần nhất")
+        st.markdown("#### 📜 Sự kiện Gần nhất")
         events_placeholder = st.empty()
 
     if start_btn:
         channel = BoundedChannel(capacity=buffer_capacity, strategy=backpressure_mode)
         raw_events = []
         batch_history = []
-
         start_time = time.time()
         window_start = time.time()
         current_window_items = []
@@ -539,7 +620,7 @@ with tab1:
 
                     if avg_t >= alert_threshold and count_t > 0:
                         alert_placeholder.markdown(
-                            f'<div class="alert-banner">Cảnh báo — Window #{window_index} nhiệt độ trung bình {avg_t}°C vượt ngưỡng {alert_threshold}°C</div>',
+                            f'<div class="alert-banner">⚠ Cảnh báo — Window #{window_index} nhiệt độ trung bình {avg_t}°C vượt ngưỡng {alert_threshold}°C</div>',
                             unsafe_allow_html=True
                         )
                     else:
@@ -564,15 +645,14 @@ with tab1:
 
                 if batch_history:
                     batch_placeholder.dataframe(pd.DataFrame(batch_history[:5]), use_container_width=True)
-
                 if raw_events:
                     events_placeholder.dataframe(pd.DataFrame(raw_events[-8:]), use_container_width=True)
 
                 time.sleep(emission_rate / 1000.0)
 
         st.markdown("""
-        <div class="apple-card-green" style="text-align: center;">
-            <p style="color: #30d158 !important; font-weight: 600; margin: 0;">
+        <div class="success-card">
+            <p style="color: #30d158 !important; font-weight: 600; margin: 0; font-size: 1rem;">
                 ✓ Hoàn tất 15 giây giám sát luồng dữ liệu thời gian thực
             </p>
         </div>
@@ -582,21 +662,23 @@ with tab1:
 # TAB 2: THỬ NGHIỆM BACKPRESSURE
 # --------------------------------------------------------------------------------------
 with tab2:
-    st.markdown("### Kiểm soát Áp lực ngược")
+    st.write("")
     st.markdown("""
-    <p style="color: #86868b !important; font-size: 0.95rem;">
-        So sánh trực tiếp hiệu quả của 3 chiến lược khi nguồn phát <strong style="color: #f5f5f7;">nhanh hơn</strong> bên tiêu thụ.
-    </p>
+    <div class="glass-card">
+        <h3 style="color: #f5f5f7 !important; margin: 0 0 8px 0 !important;">Kiểm soát Áp lực ngược</h3>
+        <p style="color: #86868b !important; font-size: 0.95rem; margin: 0;">
+            So sánh 3 chiến lược <span class="pill pill-blue">BUFFER</span> <span class="pill pill-orange">DROP</span> <span class="pill pill-purple">LATEST</span> khi nguồn phát nhanh hơn bên tiêu thụ.
+        </p>
+    </div>
     """, unsafe_allow_html=True)
 
-    st.write("")
     bp1, bp2, bp3 = st.columns(3)
     p_delay = bp1.number_input("Tốc độ phát (ms/item)", 1, 50, 2)
     c_delay = bp2.number_input("Tốc độ nhận (ms/item)", 5, 200, 25)
     test_items = bp3.number_input("Tổng số items", 50, 500, 100, 50)
 
     st.write("")
-    if st.button("Bắt đầu Test Backpressure", type="primary"):
+    if st.button("🧪  Bắt đầu Test Backpressure", type="primary"):
         results = []
         progress = st.progress(0, text="Đang chạy thử nghiệm...")
 
@@ -634,100 +716,109 @@ with tab2:
 # TAB 3: KIẾN TRÚC OOP
 # --------------------------------------------------------------------------------------
 with tab3:
-    st.markdown("### Kiến trúc Hướng đối tượng")
     st.write("")
-
-    # Pipeline Architecture Visual
     st.markdown("""
-    <div class="pipeline-layer" style="border-left: 3px solid #0a84ff;">
-        <h5 style="color: #0a84ff !important;">Tầng 1 — Data Ingestion</h5>
+    <div class="glass-card">
+        <h3 style="color: #f5f5f7 !important; margin: 0 0 8px 0 !important;">Kiến trúc 3 Tầng Hướng đối tượng</h3>
+        <p style="color: #86868b !important; font-size: 0.92rem; margin: 0;">Reactive Pipeline Framework được thiết kế theo kiến trúc phân tầng OOP chuẩn SOLID.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Architecture layers
+    st.markdown("""
+    <div class="arch-layer arch-layer-1">
+        <h5 style="color: #2997ff !important;">📡 Tầng 1 — Data Ingestion</h5>
         <p style="color: #a1a1a6 !important; font-size: 0.88rem; margin: 0;">
-            <code>IStreamSource&lt;T&gt;</code> · <code>MockSensorSource.Emit()</code> → <code>DataStream&lt;SensorData&gt;</code>
+            <code style="background:rgba(10,132,255,0.15); color:#2997ff;">IStreamSource&lt;T&gt;</code> ·
+            <code style="background:rgba(10,132,255,0.15); color:#2997ff;">MockSensorSource.Emit()</code> →
+            <code style="background:rgba(10,132,255,0.15); color:#2997ff;">DataStream&lt;SensorData&gt;</code>
         </p>
     </div>
-    <div class="pipeline-arrow">↓</div>
-    <div class="pipeline-layer" style="border-left: 3px solid #ff9f0a;">
-        <h5 style="color: #ff9f0a !important;">Tầng 2 — Reactive Pipeline Engine</h5>
+    <div class="arch-arrow">⬇</div>
+    <div class="arch-layer arch-layer-2">
+        <h5 style="color: #ff9f0a !important;">⚙️ Tầng 2 — Reactive Pipeline Engine</h5>
         <p style="color: #a1a1a6 !important; font-size: 0.88rem; margin: 0;">
-            <code>.Filter()</code> · <code>.Map()</code> · <code>.FlatMap()</code> · <code>.Share()</code> · <code>.GroupBy&lt;TKey&gt;()</code><br>
-            <code>.TumblingWindow()</code> · <code>.WithBackpressure(BUFFER | DROP | LATEST)</code><br>
-            <code>.Aggregate(seed, accumulator)</code>
+            <code style="background:rgba(255,159,10,0.15); color:#ff9f0a;">.Filter()</code>
+            <code style="background:rgba(255,159,10,0.15); color:#ff9f0a;">.Map()</code>
+            <code style="background:rgba(255,159,10,0.15); color:#ff9f0a;">.FlatMap()</code>
+            <code style="background:rgba(255,159,10,0.15); color:#ff9f0a;">.Share()</code>
+            <code style="background:rgba(255,159,10,0.15); color:#ff9f0a;">.GroupBy&lt;TKey&gt;()</code><br>
+            <code style="background:rgba(255,159,10,0.15); color:#ff9f0a;">.TumblingWindow()</code>
+            <code style="background:rgba(255,159,10,0.15); color:#ff9f0a;">.WithBackpressure(BUFFER | DROP | LATEST)</code>
+            <code style="background:rgba(255,159,10,0.15); color:#ff9f0a;">.Aggregate()</code>
         </p>
     </div>
-    <div class="pipeline-arrow">↓</div>
-    <div class="pipeline-layer" style="border-left: 3px solid #30d158;">
-        <h5 style="color: #30d158 !important;">Tầng 3 — Data Sinks</h5>
+    <div class="arch-arrow">⬇</div>
+    <div class="arch-layer arch-layer-3">
+        <h5 style="color: #30d158 !important;">🎯 Tầng 3 — Data Sinks</h5>
         <p style="color: #a1a1a6 !important; font-size: 0.88rem; margin: 0;">
-            <code>IStreamSink&lt;in T&gt;</code> · <code>ConsoleBatchSink</code> · <code>AlertDashboardSink</code>
+            <code style="background:rgba(48,209,88,0.15); color:#30d158;">IStreamSink&lt;in T&gt;</code> ·
+            <code style="background:rgba(48,209,88,0.15); color:#30d158;">ConsoleBatchSink</code> ·
+            <code style="background:rgba(48,209,88,0.15); color:#30d158;">AlertDashboardSink</code>
         </p>
     </div>
     """, unsafe_allow_html=True)
 
     st.write("---")
 
-    st.markdown("### Nguyên lý SOLID & Design Patterns")
-    st.write("")
-
     col_s1, col_s2 = st.columns(2)
     with col_s1:
         st.markdown("""
-        <div class="apple-card">
-            <h5 style="color: #0a84ff !important; margin: 0 0 12px 0 !important;">SOLID Principles</h5>
-            <p style="font-size: 0.88rem; color: #a1a1a6 !important; line-height: 1.8;">
-                <span class="stat-pill">S</span> SRP — Mỗi class chỉ 1 trách nhiệm<br>
-                <span class="stat-pill">O</span> OCP — Thêm Sink mới không sửa core<br>
-                <span class="stat-pill">L</span> LSP — Mọi Sink thay thế được <code>IStreamSink&lt;T&gt;</code><br>
-                <span class="stat-pill">I</span> ISP — Interface nhỏ gọn<br>
-                <span class="stat-pill">D</span> DIP — Phụ thuộc vào abstraction
+        <div class="glass-card">
+            <h5 style="color: #2997ff !important; margin: 0 0 14px 0 !important;">SOLID Principles</h5>
+            <p style="font-size: 0.88rem; color: #a1a1a6 !important; line-height: 2;">
+                <span class="pill pill-blue">S</span> SRP — Mỗi class chỉ 1 trách nhiệm<br>
+                <span class="pill pill-green">O</span> OCP — Thêm Sink mới không sửa core<br>
+                <span class="pill pill-orange">L</span> LSP — Mọi Sink thay thế được interface<br>
+                <span class="pill pill-purple">I</span> ISP — Interface nhỏ gọn tối ưu<br>
+                <span class="pill pill-red">D</span> DIP — Phụ thuộc vào abstraction
             </p>
         </div>
         """, unsafe_allow_html=True)
     with col_s2:
         st.markdown("""
-        <div class="apple-card">
-            <h5 style="color: #bf5af2 !important; margin: 0 0 12px 0 !important;">Design Patterns</h5>
-            <p style="font-size: 0.88rem; color: #a1a1a6 !important; line-height: 1.8;">
-                <span class="stat-pill-purple">Pub-Sub</span> Source phát, Sink lắng nghe<br>
-                <span class="stat-pill-purple">Pipeline</span> Method Chaining liên hoàn<br>
-                <span class="stat-pill-purple">Adapter</span> Đóng gói System.Reactive<br>
-                <span class="stat-pill-purple">Multicast</span> Cold → Hot Observable
+        <div class="glass-card">
+            <h5 style="color: #bf5af2 !important; margin: 0 0 14px 0 !important;">Design Patterns</h5>
+            <p style="font-size: 0.88rem; color: #a1a1a6 !important; line-height: 2;">
+                <span class="pill pill-purple">Pub-Sub</span> Source phát, Sink lắng nghe<br>
+                <span class="pill pill-blue">Pipeline</span> Method Chaining liên hoàn<br>
+                <span class="pill pill-teal">Adapter</span> Đóng gói System.Reactive<br>
+                <span class="pill pill-orange">Multicast</span> Cold → Hot Observable
             </p>
         </div>
         """, unsafe_allow_html=True)
 
     st.write("---")
 
-    st.markdown("### Kết quả Đánh giá từ Senior Code Reviewer")
+    st.markdown("#### Kết quả Đánh giá")
     st.write("")
-
     review_data = {
-        "Tiêu chí": ["Đáp ứng đặc tả", "Kiến trúc OOP / SOLID", "An toàn luồng", "Hiệu năng & Clean Code", "Unit Tests (13/13)", "Dashboard"],
+        "Tiêu chí": ["Đáp ứng đặc tả", "Kiến trúc OOP", "An toàn luồng", "Hiệu năng", "Unit Tests", "Dashboard"],
         "Điểm (/ 10)": [9.8, 9.8, 9.7, 10.0, 9.8, 9.9]
     }
     df_review = pd.DataFrame(review_data).set_index("Tiêu chí")
     st.bar_chart(df_review)
 
     st.markdown("""
-    <div class="apple-card-green" style="text-align: center;">
-        <p style="color: #30d158 !important; font-weight: 700; font-size: 1.1rem; margin: 0; letter-spacing: -0.02em;">
-            Tổng kết: 9.87 / 10 — Xuất sắc (Production Grade)
-        </p>
+    <div class="score-card">
+        <p style="color: #86868b !important; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">Tổng kết đánh giá</p>
+        <span class="score-number">9.87 / 10</span>
+        <p style="color: #30d158 !important; font-weight: 600; font-size: 1rem; margin-top: 8px;">Xuất sắc — Production Grade</p>
     </div>
     """, unsafe_allow_html=True)
 
 # --------------------------------------------------------------------------------------
-# TAB 4: BENCHMARK RESULTS
+# TAB 4: BENCHMARK
 # --------------------------------------------------------------------------------------
 with tab4:
-    st.markdown("### Hiệu năng & Benchmark")
     st.write("")
 
-    # 1. LIVE BENCHMARK
+    # Live Benchmark
     st.markdown("""
-    <div class="apple-card-blue">
-        <h5 style="color: #0a84ff !important; margin: 0 0 8px 0 !important;">Live Benchmark trên Cloud</h5>
-        <p style="font-size: 0.85rem; color: #a1a1a6 !important; margin: 0;">
-            Chạy thử nghiệm Reactive Pipeline trực tiếp trên Cloud server để đo tốc độ xử lý thực tế.
+    <div class="glass-card">
+        <h3 style="color: #f5f5f7 !important; margin: 0 0 8px 0 !important;">🧪 Live Benchmark trên Cloud</h3>
+        <p style="color: #86868b !important; font-size: 0.9rem; margin: 0;">
+            Chạy thử nghiệm Reactive Pipeline trực tiếp trên server Cloud.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -735,9 +826,7 @@ with tab4:
     c_b1, c_b2 = st.columns([3, 7])
     with c_b1:
         bench_count = st.selectbox("Số lượng bản ghi", [10000, 50000, 100000], index=1, format_func=lambda x: f"{x:,}")
-        run_bench_btn = st.button("Chạy Live Benchmark", type="primary", use_container_width=True)
-    with c_b2:
-        st.write("")
+        run_bench_btn = st.button("🔥  Chạy Live Benchmark", type="primary", use_container_width=True)
 
     if run_bench_btn:
         bench_progress = st.progress(0, text="Đang khởi động Pipeline...")
@@ -758,28 +847,28 @@ with tab4:
                     window_batches += 1
 
             if (i + 1) % step == 0:
-                bench_progress.progress((i + 1) / bench_count, text=f"Đã xử lý {i+1:,} / {bench_count:,} bản ghi")
+                bench_progress.progress((i + 1) / bench_count, text=f"Đã xử lý {i+1:,} / {bench_count:,}")
 
         t_elapsed = time.perf_counter() - t_start
         throughput_py = int(bench_count / max(0.001, t_elapsed))
         bench_progress.empty()
 
         st.markdown(f"""
-        <div class="apple-card-green" style="text-align: center;">
-            <p style="color: #30d158 !important; font-weight: 600; font-size: 1rem; margin: 0;">
-                ✓ Hoàn tất <strong>{bench_count:,}</strong> bản ghi trong <strong>{t_elapsed*1000:.1f} ms</strong> — Tốc độ đạt <strong>{throughput_py:,} bản ghi/giây</strong>
+        <div class="bench-result">
+            <p style="color: #86868b !important; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px;">Python Cloud Throughput</p>
+            <span class="bench-number">{throughput_py:,} /s</span>
+            <p style="color: #a1a1a6 !important; font-size: 0.88rem; margin-top: 8px;">
+                {bench_count:,} bản ghi trong <span style="color: #2997ff;">{t_elapsed*1000:.1f} ms</span>
             </p>
         </div>
         """, unsafe_allow_html=True)
 
     st.write("---")
 
-    # 2. C# ENGINE COMPARISON
+    # C# Engine
     st.markdown("""
-    <h4 style="margin-bottom: 4px !important;">Đối chiếu với C# .NET 10 Engine</h4>
-    <p style="color: #86868b !important; font-size: 0.88rem;">
-        Kết quả đo trên engine C# biên dịch với <code>readonly record struct</code> (Zero GC Allocation).
-    </p>
+    <h4 style="color: #f5f5f7 !important; margin-bottom: 4px !important;">⚡ Đối chiếu với C# .NET 10 Engine</h4>
+    <p style="color: #86868b !important; font-size: 0.88rem;">Biên dịch với <code style="color:#bf5af2; background:rgba(191,90,242,0.12); padding:2px 8px; border-radius:6px;">readonly record struct</code> — Zero GC Allocation.</p>
     """, unsafe_allow_html=True)
 
     st.write("")
@@ -787,7 +876,7 @@ with tab4:
     col_r1.metric("Tổng bản ghi", "100,000")
     col_r2.metric("Thời gian", "40 ms")
     col_r3.metric("Throughput", "~2.5M/s")
-    col_r4.metric("Zero GC", "✓ Đạt chuẩn", help="readonly record struct loại bỏ 100% GC Heap Allocation")
+    col_r4.metric("Zero GC", "✓ Đạt", help="readonly record struct — 0% Heap Allocation")
 
     st.write("")
     st.code("""
@@ -804,27 +893,27 @@ KẾT QUẢ ĐO LƯỜNG HIỆU NĂNG FRAMEWORK:
 
     st.write("")
     st.markdown("""
-    <div class="apple-card">
-        <h5 style="color: #f5f5f7 !important; margin: 0 0 14px 0 !important;">Tại sao C# Engine đạt 2.5 triệu bản ghi/giây?</h5>
-        <table style="width: 100%; border-collapse: separate; border-spacing: 0 8px;">
+    <div class="glass-card">
+        <h5 style="color: #f5f5f7 !important; margin: 0 0 16px 0 !important;">Tại sao C# đạt 2.5 triệu bản ghi/giây?</h5>
+        <table class="tech-table">
             <tr>
-                <td><span class="stat-pill">readonly record struct</span></td>
+                <td><span class="pill pill-blue">record struct</span></td>
                 <td style="color: #a1a1a6 !important; font-size: 0.85rem;">Phân bổ trên Stack → Zero GC Allocation</td>
             </tr>
             <tr>
-                <td><span class="stat-pill-green">System.Reactive</span></td>
+                <td><span class="pill pill-green">System.Reactive</span></td>
                 <td style="color: #a1a1a6 !important; font-size: 0.85rem;">Push-based stream, không block thread</td>
             </tr>
             <tr>
-                <td><span class="stat-pill-purple">.Share()</span></td>
-                <td style="color: #a1a1a6 !important; font-size: 0.85rem;">Hot Observable — 1 nguồn, nhiều Sinks</td>
+                <td><span class="pill pill-purple">.Share()</span></td>
+                <td style="color: #a1a1a6 !important; font-size: 0.85rem;">Hot Observable — 1 nguồn phát, nhiều Sinks</td>
             </tr>
             <tr>
-                <td><span class="stat-pill-orange">Channels</span></td>
-                <td style="color: #a1a1a6 !important; font-size: 0.85rem;">Lock-free queue, triệu msg/giây</td>
+                <td><span class="pill pill-orange">Channels</span></td>
+                <td style="color: #a1a1a6 !important; font-size: 0.85rem;">Lock-free queue, hàng triệu msg/giây</td>
             </tr>
             <tr>
-                <td><span class="stat-pill">Interlocked</span></td>
+                <td><span class="pill pill-teal">Interlocked</span></td>
                 <td style="color: #a1a1a6 !important; font-size: 0.85rem;">CPU atomic — đếm metric không cần lock</td>
             </tr>
         </table>
