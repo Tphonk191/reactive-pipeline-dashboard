@@ -28,9 +28,27 @@ st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-    /* ── Global ── */
-    .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
-        background-color: #000000 !important;
+    /* ── Global Multi-Color Aurora Mesh Background (Apple Style) ── */
+    .stApp {
+        background-color: #060814 !important;
+        background-image: 
+            radial-gradient(at 0% 0%, rgba(10, 132, 255, 0.28) 0px, transparent 50%),
+            radial-gradient(at 100% 5%, rgba(191, 90, 242, 0.26) 0px, transparent 50%),
+            radial-gradient(at 50% 35%, rgba(48, 209, 88, 0.14) 0px, transparent 55%),
+            radial-gradient(at 95% 65%, rgba(255, 159, 10, 0.18) 0px, transparent 50%),
+            radial-gradient(at 5% 75%, rgba(0, 199, 190, 0.20) 0px, transparent 50%),
+            radial-gradient(at 80% 98%, rgba(255, 55, 95, 0.22) 0px, transparent 55%),
+            linear-gradient(180deg, #070916 0%, #0c1126 30%, #11142e 60%, #060814 100%) !important;
+        background-attachment: fixed !important;
+        background-size: cover !important;
+    }
+    [data-testid="stAppViewContainer"] {
+        background: transparent !important;
+    }
+    [data-testid="stHeader"] {
+        background: rgba(7, 9, 22, 0.65) !important;
+        backdrop-filter: blur(25px) !important;
+        -webkit-backdrop-filter: blur(25px) !important;
     }
     html, body, .stApp, .stMarkdown, p, span, label, li, td, th {
         font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', 'Helvetica Neue', sans-serif !important;
@@ -42,34 +60,43 @@ st.markdown("""
         letter-spacing: -0.02em !important;
     }
 
-    /* ── Sidebar ── */
+    /* ── Sidebar (Ambient Aurora) ── */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0a0a14 0%, #0d0f1a 50%, #0a0a14 100%) !important;
-        border-right: 1px solid rgba(255,255,255,0.06) !important;
+        background-color: #060814 !important;
+        background-image: 
+            radial-gradient(circle at 10% 10%, rgba(10, 132, 255, 0.25) 0%, transparent 60%),
+            radial-gradient(circle at 90% 45%, rgba(191, 90, 242, 0.22) 0%, transparent 60%),
+            radial-gradient(circle at 20% 85%, rgba(0, 199, 190, 0.18) 0%, transparent 60%),
+            linear-gradient(180deg, #090d20 0%, #060814 100%) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(30px) !important;
     }
     [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
     [data-testid="stSidebar"] label,
     [data-testid="stSidebar"] span {
-        color: #a1a1a6 !important;
+        color: #b0b4c8 !important;
     }
 
     /* ── Slider tracks ── */
     .stSlider [data-baseweb="slider"] [role="slider"] {
         background-color: #0a84ff !important;
+        box-shadow: 0 0 12px rgba(10, 132, 255, 0.6) !important;
     }
 
-    /* ── Tabs (Segmented Control) ── */
+    /* ── Tabs (Apple Segmented Glass Control) ── */
     .stTabs [data-baseweb="tab-list"] {
-        background: linear-gradient(135deg, rgba(30,30,34,0.9) 0%, rgba(44,44,48,0.7) 100%) !important;
+        background: rgba(255, 255, 255, 0.06) !important;
         border-radius: 16px !important;
-        padding: 5px !important;
-        gap: 3px !important;
-        border: 1px solid rgba(255,255,255,0.08) !important;
-        backdrop-filter: blur(20px) !important;
+        padding: 6px !important;
+        gap: 4px !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        backdrop-filter: blur(25px) !important;
+        -webkit-backdrop-filter: blur(25px) !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
     }
     .stTabs [data-baseweb="tab"] {
         background-color: transparent !important;
-        color: #86868b !important;
+        color: #9ba0b4 !important;
         border-radius: 12px !important;
         font-weight: 500 !important;
         font-size: 0.88rem !important;
@@ -78,37 +105,42 @@ st.markdown("""
         transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, rgba(10,132,255,0.2) 0%, rgba(100,210,255,0.1) 100%) !important;
-        color: #f5f5f7 !important;
-        box-shadow: 0 2px 8px rgba(10,132,255,0.2) !important;
+        background: linear-gradient(135deg, rgba(10, 132, 255, 0.35) 0%, rgba(191, 90, 242, 0.25) 100%) !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.22) !important;
+        box-shadow: 0 4px 16px rgba(10, 132, 255, 0.35) !important;
     }
 
     /* ── Buttons ── */
     .stButton > button {
-        background: linear-gradient(135deg, #0a84ff 0%, #5e5ce6 100%) !important;
+        background: linear-gradient(135deg, #0a84ff 0%, #5e5ce6 50%, #bf5af2 100%) !important;
         color: white !important;
-        border: none !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
         border-radius: 14px !important;
         font-weight: 600 !important;
         font-size: 0.95rem !important;
         padding: 12px 28px !important;
         transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
         letter-spacing: -0.01em !important;
+        box-shadow: 0 4px 18px rgba(10, 132, 255, 0.35) !important;
     }
     .stButton > button:hover {
-        background: linear-gradient(135deg, #2997ff 0%, #7d7aff 100%) !important;
-        transform: scale(1.02) !important;
-        box-shadow: 0 6px 24px rgba(10,132,255,0.4) !important;
+        background: linear-gradient(135deg, #2997ff 0%, #7d7aff 50%, #d178ff 100%) !important;
+        transform: translateY(-2px) scale(1.02) !important;
+        box-shadow: 0 8px 28px rgba(191, 90, 242, 0.45) !important;
     }
     .stButton > button:active {
-        transform: scale(0.98) !important;
+        transform: translateY(0px) scale(0.98) !important;
     }
 
-    /* ── Metric Cards ── */
+    /* ── Metric Cards (Frosted Glass with Colorful Glowing Tint) ── */
     [data-testid="stMetric"] {
-        border-radius: 16px !important;
+        border-radius: 18px !important;
         padding: 22px 20px !important;
-        border: 1px solid rgba(255,255,255,0.06) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
     }
     [data-testid="stMetricLabel"] {
         font-size: 0.75rem !important;
@@ -122,81 +154,92 @@ st.markdown("""
         letter-spacing: -0.03em !important;
     }
 
-    /* Metric colors — each column gets a unique gradient */
+    /* Metric colors — each column gets a unique luminous gradient */
     div[data-testid="stHorizontalBlock"] > div:nth-child(1) [data-testid="stMetric"] {
-        background: linear-gradient(145deg, rgba(10,132,255,0.15) 0%, rgba(10,132,255,0.03) 100%) !important;
-        border-left: 3px solid #0a84ff !important;
+        background: linear-gradient(145deg, rgba(10, 132, 255, 0.22) 0%, rgba(10, 132, 255, 0.05) 100%) !important;
+        border-left: 4px solid #0a84ff !important;
+        border-top: 1px solid rgba(10, 132, 255, 0.4) !important;
     }
     div[data-testid="stHorizontalBlock"] > div:nth-child(1) [data-testid="stMetricValue"] { color: #2997ff !important; }
 
     div[data-testid="stHorizontalBlock"] > div:nth-child(2) [data-testid="stMetric"] {
-        background: linear-gradient(145deg, rgba(48,209,88,0.15) 0%, rgba(48,209,88,0.03) 100%) !important;
-        border-left: 3px solid #30d158 !important;
+        background: linear-gradient(145deg, rgba(48, 209, 88, 0.20) 0%, rgba(48, 209, 88, 0.05) 100%) !important;
+        border-left: 4px solid #30d158 !important;
+        border-top: 1px solid rgba(48, 209, 88, 0.4) !important;
     }
     div[data-testid="stHorizontalBlock"] > div:nth-child(2) [data-testid="stMetricValue"] { color: #30d158 !important; }
 
     div[data-testid="stHorizontalBlock"] > div:nth-child(3) [data-testid="stMetric"] {
-        background: linear-gradient(145deg, rgba(255,159,10,0.15) 0%, rgba(255,159,10,0.03) 100%) !important;
-        border-left: 3px solid #ff9f0a !important;
+        background: linear-gradient(145deg, rgba(255, 159, 10, 0.20) 0%, rgba(255, 159, 10, 0.05) 100%) !important;
+        border-left: 4px solid #ff9f0a !important;
+        border-top: 1px solid rgba(255, 159, 10, 0.4) !important;
     }
     div[data-testid="stHorizontalBlock"] > div:nth-child(3) [data-testid="stMetricValue"] { color: #ff9f0a !important; }
 
     div[data-testid="stHorizontalBlock"] > div:nth-child(4) [data-testid="stMetric"] {
-        background: linear-gradient(145deg, rgba(191,90,242,0.15) 0%, rgba(191,90,242,0.03) 100%) !important;
-        border-left: 3px solid #bf5af2 !important;
+        background: linear-gradient(145deg, rgba(191, 90, 242, 0.22) 0%, rgba(191, 90, 242, 0.05) 100%) !important;
+        border-left: 4px solid #bf5af2 !important;
+        border-top: 1px solid rgba(191, 90, 242, 0.4) !important;
     }
     div[data-testid="stHorizontalBlock"] > div:nth-child(4) [data-testid="stMetricValue"] { color: #bf5af2 !important; }
 
     /* ── DataFrames ── */
     [data-testid="stDataFrame"], .stDataFrame {
-        border-radius: 14px !important;
+        border-radius: 16px !important;
         overflow: hidden !important;
-        border: 1px solid rgba(255,255,255,0.06) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        background: rgba(12, 16, 32, 0.6) !important;
+        backdrop-filter: blur(20px) !important;
     }
 
     /* ── Code Blocks ── */
     .stCodeBlock, pre {
-        border-radius: 14px !important;
-        border: 1px solid rgba(255,255,255,0.06) !important;
-        background-color: #0d0d0d !important;
+        border-radius: 16px !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        background: rgba(8, 12, 26, 0.75) !important;
+        backdrop-filter: blur(25px) !important;
     }
 
     /* ── Selectbox / Input ── */
     [data-baseweb="select"] > div,
     [data-baseweb="input"] > div {
-        background-color: #1c1c1e !important;
-        border-color: rgba(255,255,255,0.08) !important;
+        background-color: rgba(255, 255, 255, 0.07) !important;
+        border-color: rgba(255, 255, 255, 0.14) !important;
         border-radius: 12px !important;
+        backdrop-filter: blur(15px) !important;
     }
 
     /* ── Progress Bar ── */
     .stProgress > div > div {
-        background-color: #1c1c1e !important;
+        background-color: rgba(255, 255, 255, 0.1) !important;
         border-radius: 8px !important;
     }
     .stProgress > div > div > div {
-        background: linear-gradient(90deg, #0a84ff, #5e5ce6, #bf5af2) !important;
+        background: linear-gradient(90deg, #0a84ff, #5e5ce6, #bf5af2, #ff375f) !important;
         border-radius: 8px !important;
+        box-shadow: 0 0 16px rgba(191, 90, 242, 0.6) !important;
     }
 
     /* ── Chart ── */
     [data-testid="stVegaLiteChart"] {
-        background: linear-gradient(180deg, rgba(28,28,30,0.6) 0%, rgba(0,0,0,0) 100%) !important;
-        border: 1px solid rgba(255,255,255,0.06) !important;
-        border-radius: 16px !important;
-        padding: 16px !important;
+        background: linear-gradient(180deg, rgba(16, 22, 45, 0.6) 0%, rgba(10, 14, 30, 0.4) 100%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        border-radius: 18px !important;
+        padding: 18px !important;
+        backdrop-filter: blur(25px) !important;
     }
 
     /* ── Alerts ── */
     [data-testid="stAlert"] {
-        border-radius: 14px !important;
-        border: 1px solid rgba(255,255,255,0.06) !important;
+        border-radius: 16px !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        backdrop-filter: blur(20px) !important;
     }
 
     /* ── Divider ── */
     hr {
         border: none !important;
-        border-top: 1px solid rgba(255,255,255,0.06) !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
         margin: 28px 0 !important;
     }
 
@@ -255,18 +298,27 @@ st.markdown("""
         opacity: 0.08;
     }
     .pipe-card-blue {
-        background: linear-gradient(160deg, #0a1628 0%, #0d1f3c 40%, #091322 100%);
-        border: 1px solid rgba(10,132,255,0.25);
+        background: linear-gradient(145deg, rgba(10, 132, 255, 0.22) 0%, rgba(13, 31, 60, 0.45) 50%, rgba(9, 19, 34, 0.35) 100%);
+        border: 1px solid rgba(10, 132, 255, 0.35);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        box-shadow: 0 8px 32px rgba(10, 132, 255, 0.15);
     }
     .pipe-card-blue::before { background: radial-gradient(circle, #0a84ff, transparent 70%); }
     .pipe-card-orange {
-        background: linear-gradient(160deg, #1a1008 0%, #2a1a0a 40%, #1a1008 100%);
-        border: 1px solid rgba(255,159,10,0.25);
+        background: linear-gradient(145deg, rgba(255, 159, 10, 0.22) 0%, rgba(42, 26, 10, 0.45) 50%, rgba(26, 16, 8, 0.35) 100%);
+        border: 1px solid rgba(255, 159, 10, 0.35);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        box-shadow: 0 8px 32px rgba(255, 159, 10, 0.15);
     }
     .pipe-card-orange::before { background: radial-gradient(circle, #ff9f0a, transparent 70%); }
     .pipe-card-green {
-        background: linear-gradient(160deg, #081a0e 0%, #0c2a15 40%, #081a0e 100%);
-        border: 1px solid rgba(48,209,88,0.25);
+        background: linear-gradient(145deg, rgba(48, 209, 88, 0.22) 0%, rgba(12, 42, 21, 0.45) 50%, rgba(8, 26, 14, 0.35) 100%);
+        border: 1px solid rgba(48, 209, 88, 0.35);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        box-shadow: 0 8px 32px rgba(48, 209, 88, 0.15);
     }
     .pipe-card-green::before { background: radial-gradient(circle, #30d158, transparent 70%); }
 
@@ -285,7 +337,7 @@ st.markdown("""
     }
     .pipe-card .pipe-desc {
         font-size: 0.88rem;
-        color: #a1a1a6 !important;
+        color: #d0d5e8 !important;
         line-height: 1.7;
     }
     .pipe-card .pipe-desc code {
@@ -296,21 +348,22 @@ st.markdown("""
 
     /* ── Pill ── */
     .pill       { display:inline-block; border-radius:20px; padding:4px 14px; font-size:0.8rem; font-weight:600; margin:2px 4px; }
-    .pill-blue  { background:rgba(10,132,255,0.15); color:#2997ff; }
-    .pill-green { background:rgba(48,209,88,0.15);  color:#30d158; }
-    .pill-orange{ background:rgba(255,159,10,0.15); color:#ff9f0a; }
-    .pill-purple{ background:rgba(191,90,242,0.15); color:#bf5af2; }
-    .pill-red   { background:rgba(255,69,58,0.15);  color:#ff453a; }
-    .pill-teal  { background:rgba(100,210,255,0.15); color:#64d2ff; }
+    .pill-blue  { background:rgba(10,132,255,0.22); color:#5ac8fa; border:1px solid rgba(10,132,255,0.3); }
+    .pill-green { background:rgba(48,209,88,0.22);  color:#30d158; border:1px solid rgba(48,209,88,0.3); }
+    .pill-orange{ background:rgba(255,159,10,0.22); color:#ff9f0a; border:1px solid rgba(255,159,10,0.3); }
+    .pill-purple{ background:rgba(191,90,242,0.22); color:#d178ff; border:1px solid rgba(191,90,242,0.3); }
+    .pill-red   { background:rgba(255,69,58,0.22);  color:#ff6961; border:1px solid rgba(255,69,58,0.3); }
+    .pill-teal  { background:rgba(100,210,255,0.22); color:#64d2ff; border:1px solid rgba(100,210,255,0.3); }
 
     /* ── Glass Card ── */
     .glass-card {
-        background: linear-gradient(145deg, rgba(28,28,30,0.8) 0%, rgba(44,44,48,0.4) 100%);
-        border: 1px solid rgba(255,255,255,0.08);
+        background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+        border: 1px solid rgba(255,255,255,0.14);
         border-radius: 20px;
         padding: 28px 24px;
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.25);
         margin-bottom: 16px;
     }
 
@@ -355,11 +408,14 @@ st.markdown("""
 
     /* ── Score Card ── */
     .score-card {
-        background: linear-gradient(160deg, #0d1f3c 0%, #1a0a2e 50%, #0d1f3c 100%);
-        border: 1px solid rgba(191,90,242,0.25);
+        background: linear-gradient(145deg, rgba(13, 31, 60, 0.5) 0%, rgba(26, 10, 46, 0.5) 50%, rgba(13, 31, 60, 0.5) 100%);
+        border: 1px solid rgba(191, 90, 242, 0.35);
         border-radius: 20px;
         padding: 28px;
         text-align: center;
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        box-shadow: 0 8px 32px rgba(191, 90, 242, 0.15);
     }
     .score-card .score-number {
         font-size: 3.5rem;
@@ -373,11 +429,14 @@ st.markdown("""
 
     /* ── Benchmark Result Card ── */
     .bench-result {
-        background: linear-gradient(160deg, #0a1628 0%, #0a0d1a 100%);
-        border: 1px solid rgba(10,132,255,0.2);
+        background: linear-gradient(145deg, rgba(10, 22, 40, 0.5) 0%, rgba(10, 13, 26, 0.5) 100%);
+        border: 1px solid rgba(10, 132, 255, 0.35);
         border-radius: 20px;
         padding: 28px;
         text-align: center;
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        box-shadow: 0 8px 32px rgba(10, 132, 255, 0.15);
     }
     .bench-result .bench-number {
         font-size: 2.8rem;
@@ -390,11 +449,13 @@ st.markdown("""
     }
 
     /* ── Tech Table ── */
-    .tech-table { width:100%; border-collapse:separate; border-spacing:0 6px; }
-    .tech-table td { padding: 8px 12px; vertical-align: middle; }
+    .tech-table { width:100%; border-collapse:separate; border-spacing:0 8px; }
+    .tech-table td { padding: 10px 14px; vertical-align: middle; }
     .tech-table tr {
-        background: rgba(28,28,30,0.5);
-        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        backdrop-filter: blur(15px);
     }
 
     /* ── Hide Streamlit chrome ── */
