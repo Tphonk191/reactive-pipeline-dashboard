@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reactive Pipeline Framework · ISO C++20 & C# .NET 10 Engine</title>
+  <meta name="description" content="High-throughput reactive streaming engine in ISO C++20 and C# .NET 10 with backpressure governance, stack-allocated tumbling windows, and zero garbage collection pause.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@900&family=Red+Hat+Text:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="brand-mark">Reactive Pipeline</div>
+    <nav class="top-actions" aria-label="Main Navigation">
+      <a href="#simulator" class="nav-link">Live Telemetry</a>
+      <a href="#how-it-works" class="nav-link">Architecture</a>
+      <a href="https://reactive-pipeline-dashboard-lwf9jcp7ktqsthug2byk3n.streamlit.app/" target="_blank" rel="noopener" class="nav-button">Open Cloud Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero: Colour field, two-ink statement with live telemetry preview -->
+    <section class="hero-section" id="hero">
+      <div class="hero-container">
+        <h1 class="hero-title">
+          <span class="hero-line-1">ZERO PAUSE</span>
+          <span class="hero-line-2">STREAMING</span>
+        </h1>
+        <div class="hero-split-row">
+          <div class="hero-descriptor">
+            <p class="hero-statement">
+              An object-oriented reactive telemetry engine in ISO C++20 and C# .NET 10. Stack-allocated tumbling windows and bounded channels at sixty-six million events per second.
+            </p>
+            <div class="hero-metrics-strip">
+              <span class="hero-stat-item">66.7M events/sec</span>
+              <span class="hero-stat-item">0.00 ms GC pause</span>
+              <span class="hero-stat-item">10/10 tests verified</span>
+            </div>
+            <div class="hero-action-cell">
+              <a href="#simulator" class="button-accent">Run Telemetry Engine</a>
+            </div>
+          </div>
+          <div class="hero-media-cell">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/australia-sounding-rocket-campaign-press-kit-svs14164-poster.jpg" width="854" height="480" class="hero-video-preview" aria-hidden="true">
+              <source src="assets/australia-sounding-rocket-campaign-press-kit-svs14164.webm" type="video/webm">
+            </video>
+            <span class="hero-media-caption">Suborbital aerospace flight telemetry stream verified under peak vibration.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 1: How It Works - Stages as one bar -->
+    <section class="section stage-section" id="how-it-works">
+      <div class="content-container">
+        <h2 class="section-title">Four Pipeline Stages</h2>
+        <div class="pipeline-bar" data-ui>
+          <div class="bar-segment segment-ingest" style="flex-grow: 15;">
+            <div class="segment-duration">Sub-microsecond</div>
+            <div class="segment-label">1. Ingestion Source</div>
+            <div class="segment-desc">Tri-channel IoT telemetry emitting float32 sensor packets</div>
+          </div>
+          <div class="bar-segment segment-filter" style="flex-grow: 20;">
+            <div class="segment-duration">0.05 microseconds</div>
+            <div class="segment-label">2. Predicate Filter</div>
+            <div class="segment-desc">Zero-heap functional predicates discard out-of-band noise</div>
+          </div>
+          <div class="bar-segment segment-buffer" style="flex-grow: 40;">
+            <div class="segment-duration">1.40 microseconds</div>
+            <div class="segment-label">3. Bounded Channel</div>
+            <div class="segment-desc">Atomic ring buffer under backpressure drop governance</div>
+          </div>
+          <div class="bar-segment segment-window" style="flex-grow: 25;">
+            <div class="segment-duration">0.04 microseconds</div>
+            <div class="segment-label">4. Tumbling Window</div>
+            <div class="segment-desc">Time-batched statistical aggregation to alert sinks</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Interactive Live Telemetry Simulator (The Live Thing) -->
+    <section class="section sim-section" id="simulator">
+      <div class="content-container">
+        <h2 class="section-title">Live Ingestion Telemetry</h2>
+        <div class="sim-wrapper" data-ui>
+          <div class="sim-controls-panel">
+            <div class="control-group">
+              <label for="ingest-rate" class="control-label">Ingestion rate</label>
+              <div class="control-row">
+                <input type="range" id="ingest-rate" min="1000" max="100000" step="5000" value="50000" class="sim-slider">
+                <span id="rate-display" class="control-value">50,000 /s</span>
+              </div>
+            </div>
+            <div class="control-group">
+              <span class="control-label">Ring buffer capacity</span>
+              <div class="button-toggle-group">
+                <button type="button" class="toggle-btn" data-capacity="16">16 slots</button>
+                <button type="button" class="toggle-btn active" data-capacity="64">64 slots</button>
+                <button type="button" class="toggle-btn" data-capacity="256">256 slots</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <span class="control-label">Backpressure strategy</span>
+              <div class="button-toggle-group">
+                <button type="button" class="toggle-btn active" data-strategy="DropOldest">Drop Oldest</button>
+                <button type="button" class="toggle-btn" data-strategy="DropNewest">Drop Newest</button>
+                <button type="button" class="toggle-btn" data-strategy="Block">Block Producer</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="sim-telemetry-panel">
+            <div class="telemetry-ledger-board">
+              <div class="telemetry-row">
+                <span class="ledger-label">Live throughput</span>
+                <span class="ledger-val" id="val-throughput">0</span>
+                <span class="ledger-unit">events / second</span>
+              </div>
+              <div class="telemetry-row">
+                <span class="ledger-label">Dropped packets</span>
+                <span class="ledger-val" id="val-dropped">0</span>
+                <span class="ledger-unit">governed by policy</span>
+              </div>
+              <div class="telemetry-row">
+                <span class="ledger-label">Window average</span>
+                <span class="ledger-val" id="val-window-avg">27.50</span>
+                <span class="ledger-unit">degrees celsius</span>
+              </div>
+              <div class="telemetry-row ledger-accent">
+                <span class="ledger-label">GC pause</span>
+                <span class="ledger-val">0.00</span>
+                <span class="ledger-unit">ms (Zero GC)</span>
+              </div>
+            </div>
+            <div class="sim-stream-canvas-container">
+              <canvas id="stream-canvas" width="800" height="96"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Proof - Monumental Statement & Telemetry Archival Asset -->
+    <section class="section proof-section" id="proof">
+      <div class="content-container">
+        <h2 class="section-title">Verified Specifications</h2>
+        <div class="monumental-statement-box">
+          <p class="monumental-text" id="cycling-specs">
+            <span class="spec-token lit">ISO C++20 NATIVE CORE,</span>
+            <span class="spec-token">66.7 MILLION EVENTS PER SECOND,</span>
+            <span class="spec-token">ZERO HEAP ALLOCATION IN INNER LOOP,</span>
+            <span class="spec-token">ATOMIC RING BUFFERS,</span>
+            <span class="spec-token">0.00 MS GC PAUSES.</span>
+          </p>
+        </div>
+        <div class="archival-media-block">
+          <figure class="media-figure">
+            <img src="assets/x-57-undergoes-initial-telemetry-testing-afrc2020.jpg" width="1920" height="1282" alt="Engineers monitoring telemetry channels at NASA Armstrong Flight Research Center" class="archival-photo" loading="lazy" decoding="async">
+            <figcaption class="media-caption">
+              Telemetry testing console at NASA Armstrong Flight Research Center. Continuous sensor telemetry demands predictable latency with zero runtime garbage collection pauses.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Features - Giant Command Menu -->
+    <section class="section command-section" id="features">
+      <div class="content-container">
+        <h2 class="section-title">Core Engine Interface</h2>
+        <div class="command-menu-wrapper" data-ui>
+          <div class="search-row">
+            <input type="text" id="command-search" placeholder="Filter pipeline methods..." class="command-search-input" aria-label="Filter pipeline methods">
+          </div>
+          <div class="command-list" id="command-list">
+            <div class="command-row active" data-name="DataStream::Filter" tabindex="0">
+              <span class="cmd-name">DataStream&lt;T&gt;::Filter</span>
+              <span class="cmd-badge">STK-01</span>
+              <div class="cmd-detail">Evaluates inline boolean predicates with move semantics, zero dynamic allocation.</div>
+            </div>
+            <div class="command-row" data-name="BoundedChannel::Write" tabindex="0">
+              <span class="cmd-name">BoundedChannel&lt;T&gt;::Write</span>
+              <span class="cmd-badge">STK-02</span>
+              <div class="cmd-detail">Executes atomic ring buffer insertion governed by DropOldest or Block policies.</div>
+            </div>
+            <div class="command-row" data-name="TumblingWindow::Aggregate" tabindex="0">
+              <span class="cmd-name">TumblingWindow&lt;T&gt;::Aggregate</span>
+              <span class="cmd-badge">STK-03</span>
+              <div class="cmd-detail">Collects non-overlapping discrete time slices and computes min, max, and rolling average.</div>
+            </div>
+            <div class="command-row" data-name="Backpressure::DropOldest" tabindex="0">
+              <span class="cmd-name">BackpressureStrategy::DropOldest</span>
+              <span class="cmd-badge">STK-04</span>
+              <div class="cmd-detail">Evicts stale telemetry heads when ring buffer reaches capacity, preserving real-time state.</div>
+            </div>
+            <div class="command-row" data-name="Subject::Broadcast" tabindex="0">
+              <span class="cmd-name">Subject&lt;T&gt;::Broadcast</span>
+              <span class="cmd-badge">STK-05</span>
+              <div class="cmd-detail">Multicasts sensor observations to registered sinks without intermediate heap copying.</div>
+            </div>
+            <div class="command-row" data-name="AlertSink::Dispatch" tabindex="0">
+              <span class="cmd-name">AlertDashboardSink::OnNext</span>
+              <span class="cmd-badge">STK-06</span>
+              <div class="cmd-detail">Triggers threshold alarms when windowed metrics exceed critical limits.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Architecture and Verification -->
+    <section class="section video-section" id="telemetry-media">
+      <div class="content-container">
+        <h2 class="section-title">Flight Telemetry Verification</h2>
+        <div class="media-duo-grid">
+          <div class="media-duo-cell">
+            <img src="assets/x-57-undergoes-initial-telemetry-testing-afrc2020-2.jpg" width="1920" height="1314" alt="Engineers operating telemetry data acquisition racks" class="archival-photo" loading="lazy" decoding="async">
+            <p class="media-caption">
+              Multi-channel data acquisition racks verifying real-time packet timing under zero loss requirements.
+            </p>
+          </div>
+          <div class="media-duo-cell">
+            <img src="assets/architecture-telemetry-array.jpg" width="1600" height="1000" alt="Telemetry structural sensor array infrastructure" class="archival-photo" loading="lazy" decoding="async">
+            <p class="media-caption">
+              High-throughput sensor node infrastructure deployed across synchronous real-time bus interfaces.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Call To Action - A Sentence With A Blank -->
+    <section class="section cta-section" id="cta">
+      <div class="content-container">
+        <h2 class="section-title">Deploy The Pipeline</h2>
+        <div class="sentence-form-wrapper" data-ui>
+          <div class="sentence-form">
+            <span>Clone the verified engine for</span>
+            <select id="target-arch" class="sentence-input-select" aria-label="Select target architecture">
+              <option value="cpp20">ISO C++20</option>
+              <option value="csharp">C# .NET 10</option>
+              <option value="streamlit">Python Cloud</option>
+            </select>
+            <span>with full test suites</span>
+            <a href="https://github.com/Tphonk191/reactive-pipeline-dashboard" target="_blank" rel="noopener" class="button-accent">Clone Repository</a>
+          </div>
+          <p class="cta-footnote">
+            Includes complete CMake configuration, 10 automated unit test cases, and ready-to-run telemetry benches.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    <div class="footer-container">
+      <div class="footer-monument">REACTIVE PIPELINE FRAMEWORK</div>
+      <div class="footer-links-row">
+        <div class="footer-col">
+          <span class="footer-col-title">Repositories</span>
+          <a href="https://github.com/Tphonk191/reactive-pipeline-dashboard" target="_blank" rel="noopener" class="footer-link">GitHub repository</a>
+          <a href="https://reactive-pipeline-dashboard-lwf9jcp7ktqsthug2byk3n.streamlit.app/" target="_blank" rel="noopener" class="footer-link">Live Streamlit app</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">Architecture</span>
+          <span class="footer-text">ISO C++20 templates and C# .NET 10 records</span>
+          <span class="footer-text">Stack value semantics with zero GC allocation</span>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">Performance</span>
+          <span class="footer-text">66.7M events per second in C++20 native</span>
+          <span class="footer-text">2.5M events per second in C# .NET 10 core</span>
+        </div>
+      </div>
+      <div class="footer-credits-box">
+        <p class="credits-text">
+          Pictures and footage: <a href="https://commons.wikimedia.org/wiki/File:X-57_Undergoes_Initial_Telemetry_Testing_(AFRC2020-0038-46).jpg" target="_blank" rel="noopener">“X-57 Undergoes Initial Telemetry Testing (AFRC2020-0038-46)”</a> by NASA Armstrong Flight Research Center / NASA/Ken Ulbrich, public domain; <a href="https://commons.wikimedia.org/wiki/File:Australia_Sounding_Rocket_Campaign_Press_Kit_(SVS14164_-_DEUCE_Launch).webm" target="_blank" rel="noopener">“Australia Sounding Rocket Campaign Press Kit (SVS14164 - DEUCE Launch)”</a> by NASA's Scientific Visualization Studio - NASA/WFF/Keith Koe…, public domain; <a href="https://commons.wikimedia.org/wiki/File:X-57_Undergoes_Initial_Telemetry_Testing_(AFRC2020-0038-48).jpg" target="_blank" rel="noopener">“X-57 Undergoes Initial Telemetry Testing (AFRC2020-0038-48)”</a> by NASA Armstrong Flight Research Center / NASA/Ken Ulbrich, public domain; <a href="https://picsum.photos/id/887/info" target="_blank" rel="noopener">“Telemetry Structural Array (ID 887)”</a> via Picsum Photos, free license.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
