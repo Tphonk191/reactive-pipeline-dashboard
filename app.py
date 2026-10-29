@@ -26,10 +26,10 @@ st.set_page_config(
 # ======================================================================================
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
-    /* ── Root Design Tokens ── */
+    /* ── Native High-Fidelity Typography Stack ── */
     :root {
+        --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+        --font-mono: "SF Mono", "JetBrains Mono", "Cascadia Code", "Fira Code", monospace;
         --canvas: #090b10;
         --surface-1: #11141d;
         --surface-2: #171b26;
@@ -53,7 +53,7 @@ st.markdown("""
     /* ── Global Styles & Reset ── */
     html, body, .stApp {
         background-color: var(--canvas) !important;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+        font-family: var(--font-sans) !important;
         color: var(--text-primary) !important;
         -webkit-font-smoothing: antialiased;
         letter-spacing: -0.011em;
@@ -83,7 +83,7 @@ st.markdown("""
 
     /* Headings (Refuse gradient text - emphasis from size and weight) */
     h1, h2, h3, h4 {
-        font-family: 'Inter', sans-serif !important;
+        font-family: var(--font-sans) !important;
         font-weight: 600 !important;
         color: var(--text-primary) !important;
         letter-spacing: -0.025em !important;
@@ -95,7 +95,7 @@ st.markdown("""
 
     /* ── Tabular Numbers for Telemetry ── */
     .tabular-num, [data-testid="stMetricValue"] {
-        font-family: 'JetBrains Mono', monospace !important;
+        font-family: var(--font-mono) !important;
         font-variant-numeric: tabular-nums !important;
         font-feature-settings: "tnum" 1 !important;
     }
@@ -225,7 +225,7 @@ st.markdown("""
         border-radius: var(--radius-sm);
         font-size: 0.72rem;
         font-weight: 500;
-        font-family: 'JetBrains Mono', monospace;
+        font-family: var(--font-mono);
     }
     .badge-live {
         background: rgba(16, 185, 129, 0.12);
