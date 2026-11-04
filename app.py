@@ -10,6 +10,15 @@ VN_TZ = timezone(timedelta(hours=7))
 
 import streamlit as st
 import pandas as pd
+import textwrap
+
+def render_html(html_str: str):
+    clean = textwrap.dedent(html_str).strip()
+    if hasattr(st, "html"):
+        st.html(clean)
+    else:
+        st.markdown(clean, unsafe_allow_html=True)
+
 
 # --------------------------------------------------------------------------------------
 # CẤU HÌNH TRANG
@@ -653,83 +662,73 @@ with tab2:
 # TAB 3: ARCHITECTURE & SOLID SPECIFICATION
 # --------------------------------------------------------------------------------------
 with tab3:
-    st.markdown("""
-    <div class="hud-card">
-        <div class="hud-header">
-            <span class="hud-title">3-Tier Object-Oriented Reactive Architecture</span>
-            <span class="badge badge-muted">SPECIFICATION: OOP.MD</span>
+    render_html("""
+<div class="hud-card">
+    <div class="hud-header">
+        <span class="hud-title">3-Tier Object-Oriented Reactive Architecture</span>
+        <span class="badge badge-muted">SPECIFICATION: OOP.MD</span>
+    </div>
+    <div style="background:var(--surface-2); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 16px; margin-bottom:8px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <strong style="color:#60a5fa; font-size:0.9rem;">1. Data Ingestion (IStreamSource&lt;T&gt;)</strong>
+            <span class="badge" style="background:rgba(59,130,246,0.15); color:#60a5fa; font-size:0.75rem;">PUBLISHER</span>
         </div>
-        
-        <!-- Tier 1: Ingestion -->
-        <div style="background:var(--surface-2); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 16px; margin-bottom:8px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                <strong style="color:#60a5fa; font-size:0.9rem;">1. Data Ingestion (IStreamSource&lt;T&gt;)</strong>
-                <span class="badge" style="background:rgba(59,130,246,0.15); color:#60a5fa; font-size:0.75rem;">PUBLISHER</span>
-            </div>
-            <div style="font-family:'JetBrains Mono', monospace; font-size:0.82rem; color:#cbd5e1;">
-                MockSensorSource.emit() &rarr; <span style="color:#38bdf8;">DataStream&lt;SensorData&gt;</span>
-            </div>
+        <div style="font-family:'JetBrains Mono', monospace; font-size:0.82rem; color:#cbd5e1;">
+            MockSensorSource.emit() &rarr; <span style="color:#38bdf8;">DataStream&lt;SensorData&gt;</span>
         </div>
-
-        <!-- Flow Arrow -->
-        <div style="text-align:center; color:#64748b; font-size:1.1rem; line-height:1; margin:4px 0;">
-            &darr; <span style="font-size:0.75rem; color:#94a3b8; font-family:'JetBrains Mono', monospace;">DataStream / Reactive Stream</span>
+    </div>
+    <div style="text-align:center; color:#64748b; font-size:1.1rem; line-height:1; margin:6px 0;">
+        &darr; <span style="font-size:0.75rem; color:#94a3b8; font-family:'JetBrains Mono', monospace;">DataStream / Reactive Stream</span>
+    </div>
+    <div style="background:var(--surface-2); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 16px; margin:8px 0;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <strong style="color:#a78bfa; font-size:0.9rem;">2. Reactive Pipeline Engine (OOP Layer)</strong>
+            <span class="badge" style="background:rgba(167,139,250,0.15); color:#a78bfa; font-size:0.75rem;">PIPELINE CHAIN</span>
         </div>
-
-        <!-- Tier 2: Reactive Engine -->
-        <div style="background:var(--surface-2); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 16px; margin:8px 0;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                <strong style="color:#a78bfa; font-size:0.9rem;">2. Reactive Pipeline Engine (OOP Layer)</strong>
-                <span class="badge" style="background:rgba(167,139,250,0.15); color:#a78bfa; font-size:0.75rem;">PIPELINE CHAIN</span>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:8px;">
+            <div style="background:var(--surface-1); padding:8px 12px; border-radius:4px; border-left:3px solid #38bdf8;">
+                <code style="color:#38bdf8; font-size:0.8rem;">.filter(Predicate)</code>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">Loại bỏ bản ghi nhiễu ngoại vi</div>
             </div>
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:8px;">
-                <div style="background:var(--surface-1); padding:8px 12px; border-radius:4px; border-left:3px solid #38bdf8;">
-                    <code style="color:#38bdf8; font-size:0.8rem;">.filter(Predicate)</code>
-                    <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">Loại bỏ bản ghi nhiễu ngoại vi</div>
-                </div>
-                <div style="background:var(--surface-1); padding:8px 12px; border-radius:4px; border-left:3px solid #f59e0b;">
-                    <code style="color:#f59e0b; font-size:0.8rem;">.withBackpressure()</code>
-                    <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">Điều tiết DROP / BUFFER / LATEST</div>
-                </div>
-                <div style="background:var(--surface-1); padding:8px 12px; border-radius:4px; border-left:3px solid #10b981;">
-                    <code style="color:#10b981; font-size:0.8rem;">.tumblingWindow()</code>
-                    <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">Gom nhóm cửa sổ thời gian</div>
-                </div>
-                <div style="background:var(--surface-1); padding:8px 12px; border-radius:4px; border-left:3px solid #ec4899;">
-                    <code style="color:#ec4899; font-size:0.8rem;">.share() [Multicast]</code>
-                    <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">Phân phối song song không nhân bản</div>
-                </div>
+            <div style="background:var(--surface-1); padding:8px 12px; border-radius:4px; border-left:3px solid #f59e0b;">
+                <code style="color:#f59e0b; font-size:0.8rem;">.withBackpressure()</code>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">Điều tiết DROP / BUFFER / LATEST</div>
             </div>
-        </div>
-
-        <!-- Flow Arrow Split -->
-        <div style="text-align:center; color:#64748b; font-size:1.1rem; line-height:1; margin:4px 0;">
-            &darr; <span style="font-size:0.75rem; color:#94a3b8; font-family:'JetBrains Mono', monospace;">Transformed Data Engine (Multicast)</span> &darr;
-        </div>
-
-        <!-- Tier 3: Data Sinks -->
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin-top:8px;">
-            <div style="background:var(--surface-2); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 14px;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                    <strong style="color:#34d399; font-size:0.85rem;">3A. ConsoleBatchSink</strong>
-                    <span class="badge" style="background:rgba(52,211,153,0.15); color:#34d399; font-size:0.7rem;">SUBSCRIBER</span>
-                </div>
-                <div style="font-size:0.78rem; color:#94a3b8;">
-                    Gom nhóm thống kê thời gian thực: Tính giá trị AVG, MIN, MAX trên từng cửa sổ dữ liệu.
-                </div>
+            <div style="background:var(--surface-1); padding:8px 12px; border-radius:4px; border-left:3px solid #10b981;">
+                <code style="color:#10b981; font-size:0.8rem;">.tumblingWindow()</code>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">Gom nhóm cửa sổ thời gian</div>
             </div>
-            <div style="background:var(--surface-2); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 14px;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                    <strong style="color:#f87171; font-size:0.85rem;">3B. AlertDashboardSink</strong>
-                    <span class="badge" style="background:rgba(248,113,113,0.15); color:#f87171; font-size:0.7rem;">OBSERVER</span>
-                </div>
-                <div style="font-size:0.78rem; color:#94a3b8;">
-                    Giám sát an toàn: Kích hoạt cảnh báo tức thì khi nhiệt độ cửa sổ vượt ngưỡng tới hạn.
-                </div>
+            <div style="background:var(--surface-1); padding:8px 12px; border-radius:4px; border-left:3px solid #ec4899;">
+                <code style="color:#ec4899; font-size:0.8rem;">.share() [Multicast]</code>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">Phân phối song song không nhân bản</div>
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    <div style="text-align:center; color:#64748b; font-size:1.1rem; line-height:1; margin:6px 0;">
+        &darr; <span style="font-size:0.75rem; color:#94a3b8; font-family:'JetBrains Mono', monospace;">Transformed Data Engine (Multicast)</span> &darr;
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin-top:8px;">
+        <div style="background:var(--surface-2); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                <strong style="color:#34d399; font-size:0.85rem;">3A. ConsoleBatchSink</strong>
+                <span class="badge" style="background:rgba(52,211,153,0.15); color:#34d399; font-size:0.7rem;">SUBSCRIBER</span>
+            </div>
+            <div style="font-size:0.78rem; color:#94a3b8;">
+                Gom nhóm thống kê thời gian thực: Tính giá trị AVG, MIN, MAX trên từng cửa sổ dữ liệu.
+            </div>
+        </div>
+        <div style="background:var(--surface-2); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                <strong style="color:#f87171; font-size:0.85rem;">3B. AlertDashboardSink</strong>
+                <span class="badge" style="background:rgba(248,113,113,0.15); color:#f87171; font-size:0.7rem;">OBSERVER</span>
+            </div>
+            <div style="font-size:0.78rem; color:#94a3b8;">
+                Giám sát an toàn: Kích hoạt cảnh báo tức thì khi nhiệt độ cửa sổ vượt ngưỡng tới hạn.
+            </div>
+        </div>
+    </div>
+</div>
+""")
 
     with st.expander("📄 Xem sơ đồ cấu trúc dạng văn bản ASCII thuần (đặc tả oop.md)"):
         st.code("""+-----------------------------------------------------------------------------------+
@@ -756,7 +755,7 @@ with tab3:
 
     col_s1, col_s2 = st.columns(2)
     with col_s1:
-        st.markdown("""
+        render_html("""
         <div class="hud-card">
             <div class="hud-header">
                 <span class="hud-title">SOLID Design Principles</span>
@@ -773,7 +772,7 @@ with tab3:
         """, unsafe_allow_html=True)
 
     with col_s2:
-        st.markdown("""
+        render_html("""
         <div class="hud-card">
             <div class="hud-header">
                 <span class="hud-title">Applied Design Patterns</span>
@@ -789,7 +788,7 @@ with tab3:
         """, unsafe_allow_html=True)
 
     # Reviewer Scorecard
-    st.markdown("""
+    render_html("""
     <div class="hud-card" style="display:flex; justify-content:space-between; align-items:center;">
         <div>
             <div style="font-size:0.75rem; text-transform:uppercase; color:#94a3b8; letter-spacing:0.04em;">Engineering Reviewer Score</div>
