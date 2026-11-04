@@ -427,7 +427,7 @@ st.markdown(f"""
 <div style="display:flex; justify-content:space-between; align-items:flex-end; padding-bottom:18px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:20px;">
     <div>
         <div style="display:flex; align-items:center; gap:10px;">
-            <h1 style="margin:0;">Hệ Thống Reactive Pipeline Framework</h1>
+            <h1 style="margin:0;">Reactive Pipeline Framework</h1>
             <span class="badge badge-live">ONLINE</span>
             <span class="badge badge-muted">C++20 OOP</span>
         </div>
@@ -448,11 +448,11 @@ st.markdown(f"""
 # NAVIGATION TABS (OPERATE MODE)
 # --------------------------------------------------------------------------------------
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "📡 VD1: Ứng Dụng IoT (TC1)",
-    "⚖️ VD2: Áp Lực Ngược (TC2)",
-    "🧪 VD3: 10 Bài Unit Tests (TC3)",
-    "⚡ VD4: Benchmark Hiệu Năng (TC4)",
-    "🏛️ Kiến Trúc & SOLID"
+    "Giám Sát Luồng Trực Tiếp",
+    "Chẩn Đoán Áp Lực Ngược",
+    "Kiểm Thử Đơn Vị (Unit Tests)",
+    "Đo Lường Hiệu Năng",
+    "Kiến Trúc & SOLID"
 ])
 
 # --------------------------------------------------------------------------------------
@@ -738,7 +738,7 @@ with tab3:
     st.markdown("""
     <div class="hud-card">
         <div class="hud-header">
-            <span class="hud-title">TC3 - BỘ KIỂM THỬ ĐƠN VỊ TỰ ĐỘNG (VD 3 - MENU 4)</span>
+            <span class="hud-title">Bộ Kiểm Thử Đơn Vị Tự Động (Unit Tests)</span>
             <span class="badge badge-live">10/10 UNIT TESTS</span>
         </div>
         <p style="color:#94a3b8; font-size:0.88rem; margin:0; line-height:1.6;">
@@ -965,7 +965,7 @@ with tab4:
     st.markdown("""
     <div class="hud-card">
         <div class="hud-header">
-            <span class="hud-title">TC4 - BENCHMARK HIỆU NĂNG ĐỘNG CƠ C++ NATIVE & CLOUD (VD 4 - MENU 3)</span>
+            <span class="hud-title">Đo Lường Hiệu Năng Động Cơ C++ Native & Cloud</span>
             <span class="badge badge-muted">INTERACTIVE RUNNER</span>
         </div>
         <p style="color:#94a3b8; font-size:0.88rem; margin:0;">
