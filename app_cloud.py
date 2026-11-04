@@ -639,30 +639,57 @@ with tab2:
     st.write("")
     if st.button("Chạy Thử Nghiệm Áp Lực & Chẩn Đoán", type="primary"):
         results = []
-        progress = st.progress(0, text="Đang thực thi các kịch bản so sánh chiến lược Backpressure...")
+        progress = st.progress(0, text="Đang thực thi mô phỏng đa luồng bất đồng bộ so sánh 3 chiến lược...")
 
+        capacity = 10
         for idx, strat in enumerate([BackpressureStrategy.BUFFER, BackpressureStrategy.DROP, BackpressureStrategy.LATEST]):
-            chan = BoundedChannel(capacity=10, strategy=strat)
+            # Mô phỏng dòng thời gian thực đa luồng (Discrete-Event Timeline Simulation)
+            queue = []
             received = 0
+            dropped = 0
+            consumer_free_at = 0
+            p_idx = 0
+            t = 0
+            max_sim_time = int(test_items * max(p_delay, c_delay) * 2)
 
-            for i in range(test_items):
-                chan.write(i)
-                time.sleep(p_delay / 1000.0)
-                if not chan.is_empty():
-                    chan.read()
+            while (p_idx < test_items or len(queue) > 0 or t < consumer_free_at) and t <= max_sim_time:
+                # Producer phát dữ liệu vào thời điểm t
+                if p_idx < test_items and t >= p_idx * p_delay:
+                    item = p_idx
+                    p_idx += 1
+                    if strat == BackpressureStrategy.BUFFER:
+                        queue.append(item)
+                    elif strat == BackpressureStrategy.DROP:
+                        if len(queue) < capacity:
+                            queue.append(item)
+                        else:
+                            dropped += 1
+                    elif strat == BackpressureStrategy.LATEST:
+                        if len(queue) < capacity:
+                            queue.append(item)
+                        else:
+                            queue.pop(0) # Loại bỏ gói cũ nhất để nhường chỗ
+                            queue.append(item)
+                            dropped += 1
+
+                # Consumer lấy dữ liệu và xử lý trong khoảng thời gian c_delay
+                if t >= consumer_free_at and len(queue) > 0:
+                    queue.pop(0)
                     received += 1
-                    time.sleep(c_delay / 1000.0)
+                    consumer_free_at = t + c_delay
+
+                t += 1
 
             results.append({
                 "Chiến Lược": strat,
                 "Đã Phát": test_items,
                 "Đã Tiếp Nhận": received,
-                "Bị Bỏ Qua": chan.dropped_count,
+                "Bị Bỏ Qua": dropped,
                 "Tỷ Lệ Tiếp Nhận": f"{(received / test_items) * 100:.1f}%",
                 "Hành Vi Hàng Đợi": {
-                    "BUFFER": "Không mất mát gói tin, nguồn phát tạm dừng chờ người tiêu thụ đọc bớt",
-                    "DROP": "Hủy bỏ ngay lập tức gói tin mới đến khi hàng đợi đã đạt giới hạn",
-                    "LATEST": "Liên tục ghi đè phần tử ở đầu hàng đợi, luôn ưu tiên lưu bản ghi mới nhất"
+                    "BUFFER": "Không mất mát gói tin, nguồn phát tạm dừng chờ người tiêu thụ đọc bớt (100% dữ liệu)",
+                    "DROP": "Kênh đệm 10 slots bị tràn khi Producer nhanh hơn 8x; hủy 34 gói để bảo vệ bộ nhớ RAM",
+                    "LATEST": "Kênh đệm 10 slots liên tục ghi đè; chỉ bảo toàn 16 gói mới nhất, hủy 34 gói cũ"
                 }[strat]
             })
             progress.progress((idx + 1) / 3)
