@@ -24,7 +24,7 @@ def render_html(html_str: str, *args, **kwargs):
 # CẤU HÌNH TRANG
 # --------------------------------------------------------------------------------------
 st.set_page_config(
-    page_title="Reactive Pipeline Telemetry Console",
+    page_title="Bảng Điều Khiển Giám Sát Reactive Pipeline",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -403,22 +403,22 @@ class BoundedChannel:
 # --------------------------------------------------------------------------------------
 st.sidebar.markdown("""
 <div style="padding: 10px 0 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 16px;">
-    <div style="font-size: 0.95rem; font-weight: 600; color: #f8fafc; letter-spacing: -0.01em;">Pipeline Controls</div>
-    <div style="font-size: 0.75rem; color: #64748b; margin-top: 2px;">C++20 OOP Engine Telemetry</div>
+    <div style="font-size: 0.95rem; font-weight: 600; color: #f8fafc; letter-spacing: -0.01em;">Bảng Điều Khiển Pipeline</div>
+    <div style="font-size: 0.75rem; color: #64748b; margin-top: 2px;">Hệ Thống Đo Đạc Động Cơ C++20 OOP</div>
 </div>
 """, unsafe_allow_html=True)
 
-st.sidebar.markdown("<div style='font-size:0.75rem; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em;'>1. Ingestion Source</div>", unsafe_allow_html=True)
-emission_rate = st.sidebar.slider("Emission Interval (ms)", 50, 1000, 200, 50)
+st.sidebar.markdown("<div style='font-size:0.75rem; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em;'>1. Nguồn Phát Dữ Liệu (Source)</div>", unsafe_allow_html=True)
+emission_rate = st.sidebar.slider("Tần Suất Phát (ms/bản tin)", 50, 1000, 200, 50)
 
-st.sidebar.markdown("<div style='font-size:0.75rem; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em; margin-top:16px;'>2. Engine Operators</div>", unsafe_allow_html=True)
-filter_temp = st.sidebar.slider("Filter: Temp > (°C)", 15.0, 35.0, 22.0, 0.5)
-window_duration = st.sidebar.slider("Tumbling Window (s)", 1, 10, 3)
-backpressure_mode = st.sidebar.selectbox("Backpressure Strategy", [BackpressureStrategy.BUFFER, BackpressureStrategy.DROP, BackpressureStrategy.LATEST])
-buffer_capacity = st.sidebar.slider("Buffer Capacity", 5, 100, 20, 5)
+st.sidebar.markdown("<div style='font-size:0.75rem; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em; margin-top:16px;'>2. Các Toán Tử Xử Lý (Engine)</div>", unsafe_allow_html=True)
+filter_temp = st.sidebar.slider("Bộ Lọc: Nhiệt Độ > (°C)", 15.0, 35.0, 22.0, 0.5)
+window_duration = st.sidebar.slider("Cửa Sổ Thời Gian (Tumbling Window - s)", 1, 10, 3)
+backpressure_mode = st.sidebar.selectbox("Chiến Lược Áp Lực Ngược (Backpressure)", [BackpressureStrategy.BUFFER, BackpressureStrategy.DROP, BackpressureStrategy.LATEST])
+buffer_capacity = st.sidebar.slider("Dung Lượng Bộ Đệm (Slots)", 5, 100, 20, 5)
 
-st.sidebar.markdown("<div style='font-size:0.75rem; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em; margin-top:16px;'>3. Sink Thresholds</div>", unsafe_allow_html=True)
-alert_threshold = st.sidebar.slider("Alert Threshold (°C)", 25.0, 40.0, 30.0, 0.5)
+st.sidebar.markdown("<div style='font-size:0.75rem; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em; margin-top:16px;'>3. Ngưỡng Cảnh Báo (Sink Threshold)</div>", unsafe_allow_html=True)
+alert_threshold = st.sidebar.slider("Ngưỡng Kích Hoạt Cảnh Báo (°C)", 25.0, 40.0, 30.0, 0.5)
 
 # --------------------------------------------------------------------------------------
 # HEADER HUD
@@ -427,16 +427,16 @@ st.markdown(f"""
 <div style="display:flex; justify-content:space-between; align-items:flex-end; padding-bottom:18px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:20px;">
     <div>
         <div style="display:flex; align-items:center; gap:10px;">
-            <h1 style="margin:0;">Reactive Pipeline Framework</h1>
+            <h1 style="margin:0;">Hệ Thống Reactive Pipeline Framework</h1>
             <span class="badge badge-live">ONLINE</span>
             <span class="badge badge-muted">C++20 OOP</span>
         </div>
         <div style="color:#94a3b8; font-size:0.85rem; margin-top:4px;">
-            Object-Oriented Reactive Streams · Backpressure Governance · Windowed Aggregation
+            Luồng Phản Ứng Hướng Đối Tượng · Điều Tiết Áp Lực Ngược · Gom Cụm Cửa Sổ Thời Gian
         </div>
     </div>
     <div style="text-align:right;">
-        <span class="badge badge-muted">TIMEZONE: UTC+7 (ICT)</span>
+        <span class="badge badge-muted">MÚI GIỜ: UTC+7 (Hà Nội / ICT)</span>
         <div style="font-family:'JetBrains Mono', monospace; font-size:0.78rem; color:#64748b; margin-top:4px;">
             {datetime.now(tz=VN_TZ).strftime("%Y-%m-%d %H:%M:%S")}
         </div>
@@ -448,10 +448,10 @@ st.markdown(f"""
 # NAVIGATION TABS (OPERATE MODE)
 # --------------------------------------------------------------------------------------
 tab1, tab2, tab3, tab4 = st.tabs([
-    "Live Stream Telemetry",
-    "Backpressure Diagnostics",
-    "Architecture & SOLID",
-    "Engine Benchmarks"
+    "📡 Giám Sát Luồng Trực Tiếp",
+    "⚖️ Chẩn Đoán Áp Lực Ngược",
+    "🏛️ Kiến Trúc & SOLID",
+    "⚡ Đo Lường Hiệu Năng Động Cơ"
 ])
 
 # --------------------------------------------------------------------------------------
@@ -463,17 +463,17 @@ with tab1:
     <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-bottom:18px;">
         <div class="hud-card" style="margin:0;">
             <div class="hud-header">
-                <span class="hud-title">1. Ingestion Source</span>
+                <span class="hud-title">1. Nguồn Phát Dữ Liệu (Source)</span>
                 <span class="badge badge-muted">{emission_rate}ms</span>
             </div>
             <div style="font-size:0.84rem; color:#94a3b8;">
                 <code style="color:#60a5fa;">MockSensorSource</code><br>
-                3 active IoT channels (SENSOR_0, 1, 2)
+                3 kênh cảm biến IoT hoạt động (SENSOR_0, 1, 2)
             </div>
         </div>
         <div class="hud-card" style="margin:0;">
             <div class="hud-header">
-                <span class="hud-title">2. Pipeline Engine</span>
+                <span class="hud-title">2. Động Cơ Pipeline</span>
                 <span class="badge badge-muted">{backpressure_mode}</span>
             </div>
             <div style="font-size:0.84rem; color:#94a3b8;">
@@ -483,7 +483,7 @@ with tab1:
         </div>
         <div class="hud-card" style="margin:0;">
             <div class="hud-header">
-                <span class="hud-title">3. Destination Sinks</span>
+                <span class="hud-title">3. Đích Tiêu Thụ Dữ Liệu</span>
                 <span class="badge badge-muted">&gt; {alert_threshold}°C</span>
             </div>
             <div style="font-size:0.84rem; color:#94a3b8;">
@@ -497,9 +497,9 @@ with tab1:
     # Action Controls
     col_ctrl1, col_ctrl2 = st.columns([2.5, 7.5])
     with col_ctrl1:
-        start_btn = st.button("Start 15s Telemetry Stream", type="primary", use_container_width=True)
+        start_btn = st.button("Bắt Đầu Luồng Đo Đạc 15 Giây", type="primary", use_container_width=True)
     with col_ctrl2:
-        st.caption("Executes an automated 15-second real-time telemetry stream through the filter, backpressure channel, and tumbling window.")
+        st.caption("Thực thi tự động luồng dữ liệu 15 giây: Nguồn phát → Bộ lọc Filter → Kênh Backpressure → Cửa sổ Tumbling Window.")
 
     st.write("")
 
@@ -511,10 +511,10 @@ with tab1:
     m_dropped = m_col4.empty()
 
     # Pre-render placeholders with initial state
-    m_throughput.metric("Throughput", "0.0 evt/s")
-    m_latency.metric("Latency", "0.0 ms")
-    m_events.metric("Valid / Emitted", "0 / 0")
-    m_dropped.metric("Dropped Events", "0")
+    m_throughput.metric("Thông Lượng (Throughput)", "0.0 gói/giây")
+    m_latency.metric("Độ Trễ Xử Lý (Latency)", "0.0 ms")
+    m_events.metric("Hợp Lệ / Tổng Đã Phát", "0 / 0")
+    m_dropped.metric("Gói Bị Bỏ Qua (Dropped)", "0")
 
     alert_placeholder = st.empty()
     chart_placeholder = st.empty()
@@ -522,10 +522,10 @@ with tab1:
     # Two-Column Ledger View
     c_batch, c_events = st.columns([6, 4])
     with c_batch:
-        st.markdown("<div style='font-size:0.82rem; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px;'>Tumbling Window Batches</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.82rem; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px;'>Các Lô Dữ Liệu Cửa Sổ (Tumbling Window)</div>", unsafe_allow_html=True)
         batch_placeholder = st.empty()
     with c_events:
-        st.markdown("<div style='font-size:0.82rem; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px;'>Recent Ingestion Events</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.82rem; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px;'>Các Bản Ghi Vừa Tiếp Nhận (Recent Events)</div>", unsafe_allow_html=True)
         events_placeholder = st.empty()
 
     if start_btn:
@@ -538,7 +538,7 @@ with tab1:
         window_index = 0
         total_emitted = 0
 
-        with st.spinner("Processing continuous reactive stream..."):
+        with st.spinner("Đang truyền và xử lý luồng phản ứng liên tục..."):
             while (time.time() - start_time) < 15.0:
                 loop_start = time.time()
                 total_emitted += 1
@@ -572,18 +572,18 @@ with tab1:
                         avg_t = min_t = max_t = count_t = 0
 
                     batch_history.insert(0, {
-                        "Window": f"#{window_index}",
-                        "Timestamp": datetime.now(tz=VN_TZ).strftime("%H:%M:%S"),
-                        "Records": count_t,
-                        "Avg (°C)": avg_t,
-                        "Min (°C)": min_t,
-                        "Max (°C)": max_t,
-                        "Status": "CRITICAL" if avg_t >= alert_threshold else "NOMINAL"
+                        "Cửa Sổ": f"#{window_index}",
+                        "Thời Gian": datetime.now(tz=VN_TZ).strftime("%H:%M:%S"),
+                        "Số Lượng": count_t,
+                        "Nhiệt Độ TB (°C)": avg_t,
+                        "Tối Thiểu (°C)": min_t,
+                        "Tối Đa (°C)": max_t,
+                        "Trạng Thái": "NGUY HIỂM" if avg_t >= alert_threshold else "BÌNH THƯỜNG"
                     })
 
                     if avg_t >= alert_threshold and count_t > 0:
                         alert_placeholder.markdown(
-                            f'<div class="alert-banner">Threshold Alert: Window #{window_index} average temperature ({avg_t}°C) exceeds safety limit ({alert_threshold}°C).</div>',
+                            f'<div class="alert-banner">⚠️ CẢNH BÁO VƯỢT NGƯỠNG: Cửa sổ #{window_index} có nhiệt độ trung bình ({avg_t}°C) vượt quá giới hạn an toàn ({alert_threshold}°C)!</div>',
                             unsafe_allow_html=True
                         )
                     else:
@@ -596,10 +596,10 @@ with tab1:
                 throughput = round(len(raw_events) / elapsed, 1)
                 latency_ms = round((time.time() - loop_start) * 1000, 2)
 
-                m_throughput.metric("Throughput", f"{throughput} evt/s")
-                m_latency.metric("Latency", f"{latency_ms} ms")
-                m_events.metric("Valid / Emitted", f"{len(raw_events)} / {total_emitted}")
-                m_dropped.metric("Dropped Events", f"{channel.dropped_count}")
+                m_throughput.metric("Thông Lượng (Throughput)", f"{throughput} gói/giây")
+                m_latency.metric("Độ Trễ Xử Lý (Latency)", f"{latency_ms} ms")
+                m_events.metric("Hợp Lệ / Tổng Đã Phát", f"{len(raw_events)} / {total_emitted}")
+                m_dropped.metric("Gói Bị Bỏ Qua (Dropped)", f"{channel.dropped_count}")
 
                 if len(raw_events) > 1:
                     df_e = pd.DataFrame(raw_events[-30:])
@@ -613,7 +613,7 @@ with tab1:
 
                 time.sleep(emission_rate / 1000.0)
 
-        st.success("Telemetry stream cycle complete (15.0s elapsed).")
+        st.success("Chu kỳ truyền luồng dữ liệu hoàn tất thành công (15.0 giây).")
 
 # --------------------------------------------------------------------------------------
 # TAB 2: BACKPRESSURE DIAGNOSTICS
@@ -622,25 +622,24 @@ with tab2:
     st.markdown("""
     <div class="hud-card">
         <div class="hud-header">
-            <span class="hud-title">Backpressure Mechanics & Buffer Overflow Protection</span>
+            <span class="hud-title">Cơ Chế Áp Lực Ngược & Chống Tràn Bộ Đệm (Buffer Overflow Protection)</span>
             <span class="badge badge-muted">QUEUE CAPACITY: 10</span>
         </div>
         <p style="color:#94a3b8; font-size:0.88rem; margin:0; line-height:1.6;">
-            When emission rate exceeds consumption capacity, unmanaged streams cause memory exhaustion (OOM). 
-            Backpressure isolates downstream sinks through deterministic queue shedding or buffer backoff.
+            Khi tốc độ phát của nguồn vượt quá khả năng xử lý của bên tiêu thụ, luồng dữ liệu không kiểm soát sẽ gây cạn kiệt bộ nhớ (OOM). Cơ chế Backpressure cô lập hạ nguồn thông qua các chiến lược điều tiết hoặc hủy gói tin có kiểm soát.
         </p>
     </div>
     """, unsafe_allow_html=True)
 
     bp1, bp2, bp3 = st.columns(3)
-    p_delay = bp1.number_input("Producer Delay (ms/item)", 1, 50, 2)
-    c_delay = bp2.number_input("Consumer Delay (ms/item)", 5, 200, 25)
-    test_items = bp3.number_input("Emitted Test Items", 50, 500, 100, 50)
+    p_delay = bp1.number_input("Độ Trễ Nguồn Phát (ms/gói)", 1, 50, 2)
+    c_delay = bp2.number_input("Độ Trễ Bên Tiêu Thụ (ms/gói)", 5, 200, 25)
+    test_items = bp3.number_input("Số Lượng Gói Thử Nghiệm", 50, 500, 100, 50)
 
     st.write("")
-    if st.button("Run Diagnostic Stress Test", type="primary"):
+    if st.button("Chạy Thử Nghiệm Áp Lực & Chẩn Đoán", type="primary"):
         results = []
-        progress = st.progress(0, text="Executing comparative backpressure runs...")
+        progress = st.progress(0, text="Đang thực thi các kịch bản so sánh chiến lược Backpressure...")
 
         for idx, strat in enumerate([BackpressureStrategy.BUFFER, BackpressureStrategy.DROP, BackpressureStrategy.LATEST]):
             chan = BoundedChannel(capacity=10, strategy=strat)
@@ -655,22 +654,22 @@ with tab2:
                     time.sleep(c_delay / 1000.0)
 
             results.append({
-                "Strategy": strat,
-                "Emitted": test_items,
-                "Delivered": received,
-                "Dropped": chan.dropped_count,
-                "Delivery Rate": f"{(received / test_items) * 100:.1f}%",
-                "Queue Behavior": {
-                    "BUFFER": "Zero loss, backoff waiting for consumer availability",
-                    "DROP": "Immediate drop of incoming packets when queue reaches capacity",
-                    "LATEST": "Continuous overwrite of head element, preserving freshest record"
+                "Chiến Lược": strat,
+                "Đã Phát": test_items,
+                "Đã Tiếp Nhận": received,
+                "Bị Bỏ Qua": chan.dropped_count,
+                "Tỷ Lệ Tiếp Nhận": f"{(received / test_items) * 100:.1f}%",
+                "Hành Vi Hàng Đợi": {
+                    "BUFFER": "Không mất mát gói tin, nguồn phát tạm dừng chờ người tiêu thụ đọc bớt",
+                    "DROP": "Hủy bỏ ngay lập tức gói tin mới đến khi hàng đợi đã đạt giới hạn",
+                    "LATEST": "Liên tục ghi đè phần tử ở đầu hàng đợi, luôn ưu tiên lưu bản ghi mới nhất"
                 }[strat]
             })
             progress.progress((idx + 1) / 3)
 
         progress.empty()
         st.dataframe(pd.DataFrame(results), use_container_width=True)
-        st.bar_chart(pd.DataFrame(results).set_index("Strategy")[["Delivered", "Dropped"]])
+        st.bar_chart(pd.DataFrame(results).set_index("Chiến Lược")[["Đã Tiếp Nhận", "Bị Bỏ Qua"]])
 
 # --------------------------------------------------------------------------------------
 # TAB 3: ARCHITECTURE & SOLID SPECIFICATION
@@ -772,15 +771,15 @@ with tab3:
         render_html("""
         <div class="hud-card">
             <div class="hud-header">
-                <span class="hud-title">SOLID Design Principles</span>
+                <span class="hud-title">5 Nguyên Lý Thiết Kế SOLID</span>
                 <span class="badge badge-muted">OOP INTEGRITY</span>
             </div>
             <div style="font-size:0.85rem; color:#94a3b8; line-height:1.8;">
-                <strong style="color:#f8fafc;">S - SRP:</strong> Each component owns one isolated concern (Source, Channel, Sink).<br>
-                <strong style="color:#f8fafc;">O - OCP:</strong> Concrete sinks extend <code>IStreamSink</code> without mutating engine core.<br>
-                <strong style="color:#f8fafc;">L - LSP:</strong> All concrete sinks are completely substitutable for interface pointer.<br>
-                <strong style="color:#f8fafc;">I - ISP:</strong> Minimal pure virtual interfaces (<code>emit</code>, <code>consume</code>).<br>
-                <strong style="color:#f8fafc;">D - DIP:</strong> DataStream depends strictly on abstraction contracts, not concrete classes.
+                <strong style="color:#f8fafc;">S - SRP (Đơn Nhiệm):</strong> Mỗi lớp đảm nhận một trách nhiệm biệt lập duy nhất (Nguồn Source, Kênh Channel, Đích Sink).<br>
+                <strong style="color:#f8fafc;">O - OCP (Đóng Mở):</strong> Dễ dàng mở rộng thêm các Sink mới kế thừa từ <code>IStreamSink</code> mà không sửa đổi lõi Engine.<br>
+                <strong style="color:#f8fafc;">L - LSP (Thay Thế):</strong> Mọi lớp Sink cụ thể đều có thể thay thế hoàn hảo cho con trỏ interface trừu tượng cha.<br>
+                <strong style="color:#f8fafc;">I - ISP (Phân Tách Interface):</strong> Giao diện thuần ảo tinh gọn, chỉ định nghĩa các phương thức cốt lõi (<code>emit</code>, <code>consume</code>).<br>
+                <strong style="color:#f8fafc;">D - DIP (Đảo Ngược Phụ Thuộc):</strong> DataStream làm việc qua các hợp đồng interface trừu tượng, không phụ thuộc lớp cụ thể.
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -789,14 +788,14 @@ with tab3:
         render_html("""
         <div class="hud-card">
             <div class="hud-header">
-                <span class="hud-title">Applied Design Patterns</span>
+                <span class="hud-title">Các Mẫu Thiết Kế (Design Patterns)</span>
                 <span class="badge badge-muted">PATTERN AUDIT</span>
             </div>
             <div style="font-size:0.85rem; color:#94a3b8; line-height:1.8;">
-                <strong style="color:#f8fafc;">Publisher-Subscriber:</strong> Decoupled push-based asynchronous data delivery.<br>
-                <strong style="color:#f8fafc;">Pipeline Pattern:</strong> Method-chaining fluent transformation flow.<br>
-                <strong style="color:#f8fafc;">Adapter / Wrapper:</strong> Reactive infrastructure encapsulated in pure OOP classes.<br>
-                <strong style="color:#f8fafc;">Multicast (.share()):</strong> Cold-to-hot conversion broadcasting identical data to multiple sinks.
+                <strong style="color:#f8fafc;">Publisher-Subscriber:</strong> Cơ chế truyền phát bất đồng bộ tách rời giữa nguồn phát và bên đăng ký nhận.<br>
+                <strong style="color:#f8fafc;">Pipeline Pattern:</strong> Chuỗi biến đổi xâu chuỗi liên hoàn thông qua Fluent Interface.<br>
+                <strong style="color:#f8fafc;">Adapter / Wrapper:</strong> Đóng gói toàn bộ hạ tầng phản ứng phức tạp vào các lớp đối tượng OOP trong sáng.<br>
+                <strong style="color:#f8fafc;">Multicast (.share()):</strong> Phân phối đồng thời cùng một dòng dữ liệu cho nhiều Sink song song mà không bị nhân bản.
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -805,9 +804,9 @@ with tab3:
     render_html("""
     <div class="hud-card" style="display:flex; justify-content:space-between; align-items:center;">
         <div>
-            <div style="font-size:0.75rem; text-transform:uppercase; color:#94a3b8; letter-spacing:0.04em;">Engineering Reviewer Score</div>
+            <div style="font-size:0.75rem; text-transform:uppercase; color:#94a3b8; letter-spacing:0.04em;">Đánh Giá Tiêu Chuẩn Kỹ Thuật</div>
             <div style="font-size:1.8rem; font-weight:700; color:#f8fafc; font-family:'JetBrains Mono', monospace;">9.87 / 10.00</div>
-            <div style="font-size:0.82rem; color:#10b981;">Evaluation: Production Grade Verified</div>
+            <div style="font-size:0.82rem; color:#10b981;">Đánh Giá: Đạt Tiêu Chuẩn Production C++20</div>
         </div>
         <div style="display:flex; gap:16px;">
             <div style="text-align:center;">
@@ -820,7 +819,7 @@ with tab3:
             </div>
             <div style="text-align:center;">
                 <div style="font-size:1.1rem; font-weight:600; font-family:'JetBrains Mono', monospace;">100%</div>
-                <div style="font-size:0.72rem; color:#94a3b8;">Spec Coverage</div>
+                <div style="font-size:0.72rem; color:#94a3b8;">Độ Phủ Đặc Tả</div>
             </div>
         </div>
     </div>
@@ -833,19 +832,19 @@ with tab4:
     st.markdown("""
     <div class="hud-card">
         <div class="hud-header">
-            <span class="hud-title">Live Cloud Stream Benchmark (Python Core)</span>
+            <span class="hud-title">Đo Lường Hiệu Năng Động Cơ Trên Máy Chủ Đám Mây (Cloud Benchmark)</span>
             <span class="badge badge-muted">INTERACTIVE RUNNER</span>
         </div>
         <p style="color:#94a3b8; font-size:0.88rem; margin:0;">
-            Benchmark the pipeline's operational throughput (Filter -> Window -> Aggregate) on the live cloud host.
+            Đo đạc thông lượng thực thi của Pipeline (Filter -> Window -> Aggregate) trực tiếp trên máy chủ điện toán đám mây.
         </p>
     </div>
     """, unsafe_allow_html=True)
 
     b_col1, b_col2 = st.columns([3, 7])
     with b_col1:
-        bench_count = st.selectbox("Record Batch Size", [10000, 50000, 100000], index=1, format_func=lambda x: f"{x:,} records")
-        run_bench_btn = st.button("Execute Live Cloud Benchmark", type="primary", use_container_width=True)
+        bench_count = st.selectbox("Quy Mô Lô Bản Ghi (Batch Size)", [10000, 50000, 100000], index=1, format_func=lambda x: f"{x:,} records")
+        run_bench_btn = st.button("Chạy Đo Lường Hiệu Năng Trực Tiếp", type="primary", use_container_width=True)
 
     if run_bench_btn:
         bench_progress = st.progress(0)
@@ -874,12 +873,12 @@ with tab4:
 
         st.markdown(f"""
         <div class="hud-card" style="border-color:rgba(16, 185, 129, 0.4);">
-            <div style="font-size:0.75rem; text-transform:uppercase; color:#94a3b8; letter-spacing:0.04em;">Measured Cloud Telemetry</div>
+            <div style="font-size:0.75rem; text-transform:uppercase; color:#94a3b8; letter-spacing:0.04em;">Kết Quả Đo Đạc Thực Tế</div>
             <div style="font-size:1.8rem; font-weight:700; color:#f8fafc; font-family:'JetBrains Mono', monospace; margin:4px 0;">
-                {throughput_py:,} <span style="font-size:1rem; font-weight:400; color:#94a3b8;">records/sec</span>
+                {throughput_py:,} <span style="font-size:1rem; font-weight:400; color:#94a3b8;">bản ghi/giây</span>
             </div>
             <div style="font-size:0.85rem; color:#94a3b8;">
-                Processed {bench_count:,} records in <span style="color:#60a5fa; font-family:'JetBrains Mono', monospace;">{t_elapsed*1000:.1f} ms</span>
+                Đã xử lý {bench_count:,} bản ghi trong <span style="color:#60a5fa; font-family:'JetBrains Mono', monospace;">{t_elapsed*1000:.1f} ms</span>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -887,14 +886,14 @@ with tab4:
     st.write("---")
 
     # Native Verification Ledger
-    st.markdown("<div style='font-size:0.88rem; font-weight:600; color:#f8fafc; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:12px;'>Multi-Engine Performance Comparison Ledger</div>", unsafe_allow_html=True)
+    st.markdown("<div style='font-size:0.88rem; font-weight:600; color:#f8fafc; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:12px;'>Bảng So Sánh Hiệu Năng Đa Nền Tảng (Multi-Engine Ledger)</div>", unsafe_allow_html=True)
 
     ledger_data = {
-        "Engine Platform": ["C++20 Native Engine (Local)", "C# .NET 10 Core (Local)", "Python Streamlit Core (Cloud)"],
-        "Records": ["100,000", "100,000", "100,000"],
-        "Elapsed Time": ["1.50 ms", "40.0 ms", "~450 ms"],
-        "Throughput": ["66,766,867 /s", "2,498,750 /s", "~220,000 /s"],
-        "Allocation Strategy": ["Stack Value Semantics", "readonly record struct", "Dynamic Heap"],
-        "Garbage Collection Pause": ["0.00 ms (Zero GC)", "0.00 ms (Zero GC)", "Intermittent GC"]
+        "Nền Tảng Động Cơ": ["C++20 Native Engine (Cục bộ)", "C# .NET 10 Core (Cục bộ)", "Python Streamlit Core (Đám mây)"],
+        "Số Lượng Bản Ghi": ["100,000", "100,000", "100,000"],
+        "Thời Gian Xử Lý": ["1.50 ms", "40.0 ms", "~450 ms"],
+        "Thông Lượng": ["66,766,867 /s", "2,498,750 /s", "~220,000 /s"],
+        "Chiến Lược Cấp Phát Bộ Nhớ": ["Stack Value Semantics", "readonly record struct", "Dynamic Heap"],
+        "Tạm Dừng Thu Gom Rác (GC Pause)": ["0.00 ms (Zero GC)", "0.00 ms (Zero GC)", "Intermittent GC"]
     }
     st.dataframe(pd.DataFrame(ledger_data), use_container_width=True)
