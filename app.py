@@ -532,23 +532,27 @@ with tab1:
         channel = BoundedChannel(capacity=buffer_capacity, strategy=backpressure_mode)
         raw_events = []
         batch_history = []
+        instant_alerts = []
         start_time = time.time()
         window_start = time.time()
         current_window_items = []
         window_index = 0
         total_emitted = 0
+        instant_alert_count = 0
 
-        with st.spinner("Đang truyền và xử lý luồng phản ứng liên tục..."):
-            while (time.time() - start_time) < 15.0:
+        with st.spinner("Đang truyền và xử lý luồng phản ứng liên tục qua 2 nhánh Sink (.share())..."):
+            while (time.time() - start_time) < 15.0 and window_index < 5:
                 loop_start = time.time()
                 total_emitted += 1
                 sensor_id = f"SENSOR_{total_emitted % 3}"
                 temp = round(18.0 + random.random() * 20.0, 2)
                 item = SensorData(sensor_id=sensor_id, temperature=temp, timestamp=loop_start)
 
+                # Toán tử 1: Filter (> filter_temp)
                 if item.temperature > filter_temp:
                     channel.write(item)
 
+                # Tiêu thụ dữ liệu từ Kênh Backpressure
                 while not channel.is_empty():
                     consumed = channel.read()
                     if consumed:
@@ -559,8 +563,14 @@ with tab1:
                             "Nhiệt Độ (°C)": consumed.temperature
                         })
 
+                        # Nhánh Sink 3B: AlertDashboardSink (Kiểm tra cảnh báo tức thì thời gian thực)
+                        if consumed.temperature >= alert_threshold:
+                            instant_alert_count += 1
+                            instant_alerts.insert(0, f"[!!! CẢNH BÁO TỨC THÌ !!!] {consumed.sensor_id} = {consumed.temperature:.2f}°C (>= {alert_threshold}°C)")
+
+                # Nhánh Sink 3A: ConsoleBatchSink (Gom nhóm Tumbling Window mỗi window_duration giây)
                 now = time.time()
-                if (now - window_start) >= window_duration:
+                if (now - window_start) >= window_duration and window_index < 5:
                     window_index += 1
                     if current_window_items:
                         temps = [x.temperature for x in current_window_items]
@@ -581,16 +591,15 @@ with tab1:
                         "Trạng Thái": "NGUY HIỂM" if avg_t >= alert_threshold else "BÌNH THƯỜNG"
                     })
 
-                    if avg_t >= alert_threshold and count_t > 0:
-                        alert_placeholder.markdown(
-                            f'<div class="alert-banner">⚠️ CẢNH BÁO VƯỢT NGƯỠNG: Cửa sổ #{window_index} có nhiệt độ trung bình ({avg_t}°C) vượt quá giới hạn an toàn ({alert_threshold}°C)!</div>',
-                            unsafe_allow_html=True
-                        )
-                    else:
-                        alert_placeholder.empty()
-
                     current_window_items = []
                     window_start = now
+
+                # Hiển thị cảnh báo tức thì nổi bật nếu có
+                if instant_alerts:
+                    alert_placeholder.markdown(
+                        f'<div class="alert-banner">🚨 <strong>AlertDashboardSink ({instant_alert_count} lần cảnh báo tức thì):</strong> {instant_alerts[0]}</div>',
+                        unsafe_allow_html=True
+                    )
 
                 elapsed = max(0.1, time.time() - start_time)
                 throughput = round(len(raw_events) / elapsed, 1)
@@ -613,7 +622,26 @@ with tab1:
 
                 time.sleep(emission_rate / 1000.0)
 
-        st.success("Chu kỳ truyền luồng dữ liệu hoàn tất thành công (15.0 giây).")
+            # Đảm bảo xả (flush) cửa sổ cuối cùng nếu còn dữ liệu để xuất đủ 5 cửa sổ
+            if current_window_items and window_index < 5:
+                window_index += 1
+                temps = [x.temperature for x in current_window_items]
+                avg_t = round(sum(temps) / len(temps), 2)
+                min_t = round(min(temps), 2)
+                max_t = round(max(temps), 2)
+                count_t = len(current_window_items)
+                batch_history.insert(0, {
+                    "Cửa Sổ": f"#{window_index}",
+                    "Thời Gian": datetime.now(tz=VN_TZ).strftime("%H:%M:%S"),
+                    "Số Lượng": count_t,
+                    "Nhiệt Độ TB (°C)": avg_t,
+                    "Tối Thiểu (°C)": min_t,
+                    "Tối Đa (°C)": max_t,
+                    "Trạng Thái": "NGUY HIỂM" if avg_t >= alert_threshold else "BÌNH THƯỜNG"
+                })
+                batch_placeholder.dataframe(pd.DataFrame(batch_history[:5]), use_container_width=True)
+
+        st.success(f"✅ Hoàn tất 15s giám sát IoT (Khớp chuẩn Slide TC1). Đã đóng/mở đủ {window_index} cửa sổ thống kê. Tổng số cảnh báo tức thì từ AlertDashboardSink: {instant_alert_count} lần.")
 
 # --------------------------------------------------------------------------------------
 # TAB 2: BACKPRESSURE DIAGNOSTICS
