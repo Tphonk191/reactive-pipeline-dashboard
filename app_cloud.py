@@ -554,9 +554,9 @@ with tab1:
                     if consumed:
                         current_window_items.append(consumed)
                         raw_events.append({
-                            "Timestamp": datetime.fromtimestamp(consumed.timestamp, tz=VN_TZ).strftime("%H:%M:%S.%f")[:-3],
-                            "Sensor": consumed.sensor_id,
-                            "Temp (°C)": consumed.temperature
+                            "Mốc Thời Gian": datetime.fromtimestamp(consumed.timestamp, tz=VN_TZ).strftime("%H:%M:%S"),
+                            "Cảm Biến": consumed.sensor_id,
+                            "Nhiệt Độ (°C)": consumed.temperature
                         })
 
                 now = time.time()
@@ -603,7 +603,7 @@ with tab1:
 
                 if len(raw_events) > 1:
                     df_e = pd.DataFrame(raw_events[-30:])
-                    pivot = df_e.pivot_table(index="Timestamp", columns="Sensor", values="Temp (°C)").ffill().bfill()
+                    pivot = df_e.pivot_table(index="Mốc Thời Gian", columns="Cảm Biến", values="Nhiệt Độ (°C)").ffill().bfill()
                     chart_placeholder.line_chart(pivot, height=240)
 
                 if batch_history:
