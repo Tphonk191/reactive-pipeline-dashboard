@@ -642,7 +642,7 @@ with tab1:
                 })
                 batch_placeholder.dataframe(pd.DataFrame(batch_history[:5]), use_container_width=True)
 
-        st.success(f"✅ Hoàn tất 15s giám sát IoT (Khớp chuẩn Slide TC1). Đã đóng/mở đủ {window_index} cửa sổ thống kê. Tổng số cảnh báo tức thì từ AlertDashboardSink: {instant_alert_count} lần.")
+        st.success(f"✅ Hoàn tất 15s giám sát IoT. Đã đóng/mở đủ {window_index} cửa sổ thống kê. Tổng số cảnh báo tức thì từ AlertDashboardSink: {instant_alert_count} lần.")
 
 # --------------------------------------------------------------------------------------
 # TAB 2: BACKPRESSURE DIAGNOSTICS
@@ -752,7 +752,7 @@ with tab3:
     with c_btn1:
         run_tests_btn = st.button("▶️ Chạy Tự Động 10 Bài Kiểm Thử", type="primary", use_container_width=True)
     with c_btn2:
-        st.caption("Khớp mục tiêu Slide TC3: Xác nhận 10/10 bài kiểm thử đơn vị đều báo [PASS] chính xác tuyệt đối.")
+        st.caption("Kiểm tra tính đúng đắn của toàn bộ các toán tử Core, Windowing và cơ chế điều tiết Backpressure.")
 
     if run_tests_btn:
         test_results = []
@@ -797,7 +797,7 @@ with tab3:
                 <span class="badge badge-live">100% THÀNH CÔNG</span>
             </div>
             <div style="color:#94a3b8; font-size:0.82rem; margin-top:4px;">
-                Tất cả các câu lệnh <code>assert()</code> cho từng toán tử và lớp trừu tượng OOP đều vượt qua kiểm định (Khớp 100% đặc tả Slide VD3 - Menu 4).
+                Tất cả các câu lệnh <code>assert()</code> cho từng toán tử và lớp trừu tượng OOP đều vượt qua kiểm định.
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -969,7 +969,7 @@ with tab4:
             <span class="badge badge-muted">INTERACTIVE RUNNER</span>
         </div>
         <p style="color:#94a3b8; font-size:0.88rem; margin:0;">
-            Khớp mục tiêu Slide TC4: Phát DataStream::range(1, 100000) qua chuỗi filter và map, đo thời gian thực thi (ms) và thông lượng xử lý (bản ghi/giây) trên C++ Native & Cloud.
+            Đo đạc thời gian thực thi và thông lượng xử lý khi truyền phát luồng dữ liệu lớn qua chuỗi toán tử Filter và Map.
         </p>
     </div>
     """, unsafe_allow_html=True)
