@@ -12,7 +12,7 @@ import streamlit as st
 import pandas as pd
 import textwrap
 
-def render_html(html_str: str):
+def render_html(html_str: str, *args, **kwargs):
     clean = textwrap.dedent(html_str).strip()
     if hasattr(st, "html"):
         st.html(clean)
