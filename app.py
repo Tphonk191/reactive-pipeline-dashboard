@@ -330,7 +330,21 @@ st.markdown("""
     }
 
     /* ── Hide Streamlit Watermark ── */
-    #MainMenu, footer, header { visibility: hidden; }
+    /* ── Hide Streamlit Watermark but keep Sidebar Toggle Button Visible ── */
+    #MainMenu, footer { visibility: hidden; }
+    header {
+        background-color: transparent !important;
+    }
+    header [data-testid="stSidebarCollapsedControl"],
+    header [data-testid="stSidebarNavSeparator"],
+    button[kind="header"] {
+        visibility: visible !important;
+        display: flex !important;
+        background-color: #171b26 !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 6px !important;
+        color: #f8fafc !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
