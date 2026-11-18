@@ -717,8 +717,8 @@ with tab2:
                 "Tỷ Lệ Tiếp Nhận": f"{(received / test_items) * 100:.1f}%",
                 "Hành Vi Hàng Đợi": {
                     "BUFFER": "Không mất mát gói tin, nguồn phát tạm dừng chờ người tiêu thụ đọc bớt (100% dữ liệu)",
-                    "DROP": "Kênh đệm 10 slots bị tràn khi Producer nhanh hơn 8x; hủy 34 gói để bảo vệ bộ nhớ RAM",
-                    "LATEST": "Kênh đệm 10 slots liên tục ghi đè; chỉ bảo toàn 16 gói mới nhất, hủy 34 gói cũ"
+                    "DROP": f"Kênh đệm 10 slots bị tràn khi Producer nhanh hơn {max(1, c_delay//p_delay)}x; hủy {dropped} gói để bảo vệ bộ nhớ RAM",
+                    "LATEST": f"Kênh đệm 10 slots liên tục ghi đè; chỉ bảo toàn {received} gói mới nhất, hủy {dropped} gói cũ"
                 }[strat]
             })
             progress.progress((idx + 1) / 3)
